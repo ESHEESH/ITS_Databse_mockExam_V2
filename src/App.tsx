@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import { ChevronLeft, ChevronRight, CheckCircle, Timer, BookOpen, BarChart3, RotateCcw } from 'lucide-react';
+import { Analytics } from '@vercel/analytics/react';
 import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
 import { QuestionNavigator } from './components/QuestionNavigator';
@@ -347,6 +348,7 @@ function App() {
           </div>
         </div>
       </main>
+      <Analytics />
     </div>
   );
 }
