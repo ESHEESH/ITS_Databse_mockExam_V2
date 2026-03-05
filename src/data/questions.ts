@@ -1,0 +1,3222 @@
+export interface Question {
+  id: number;
+  question: string;
+  options: string[];
+  correctAnswer: number;
+  explanation: string;
+  category: string;
+}
+
+export const questions: Question[] = [
+  // Reviewer 1 - Questions 1-60
+  {
+    id: 1,
+    question: "You are structuring a table relational database. For each statement, select True or False.\n\nEach value in a field in a table must be unique",
+    options: ["True", "False"],
+    correctAnswer: 1,
+    explanation: "Each value in a field does NOT need to be unique. Only primary keys must be unique.",
+    category: "Database Fundamentals"
+  },
+  {
+    id: 2,
+    question: "You have a table named Product. The product table has column for productDescription and ProductCategory. You need to change the ProductCategory value for all the spoons in the Product to 43. Which statement should you use?",
+    options: [
+      "UPDATE Product WHERE ProductDescription = 'spoon' SET ProductCategory = 43",
+      "UPDATE Product SET ProductCategory = 43 WHERE ProductDescription = 'spoon'",
+      "UPDATE Product WHERE ProductDescription = 'spoon' TO ProductCategory = 43",
+      "UPDATE Product TO ProductCategory = 43 WHERE ProductDescription = 'spoon'"
+    ],
+    correctAnswer: 1,
+    explanation: "The correct syntax is UPDATE table SET column = value WHERE condition. SET comes before WHERE.",
+    category: "SQL"
+  },
+  {
+    id: 3,
+    question: "You need to delete all records with the GivenName Tia from the Volunteer table. Which SQL statement should you use?",
+    options: [
+      "DELETE FROM Volunteer WHERE GivenName == 'Tia'",
+      "DELETE FROM Volunteer WHERE GivenName = 'Tia'",
+      "DELETE FROM Volunteer WHERE GivenName EQUALS 'Tia'",
+      "DELETE FROM Volunteer WHERE GivenName IS 'Tia'"
+    ],
+    correctAnswer: 1,
+    explanation: "The correct syntax uses a single equals sign (=) for comparison in SQL.",
+    category: "SQL"
+  },
+  {
+    id: 4,
+    question: "You delete row in a table named Order. The corresponding row in the OrderItem table are automatically deleted. This process is an example of a/an:",
+    options: ["Domino delete", "Waterfall delete", "Functional delete", "Cascade delete", "Inherited delete"],
+    correctAnswer: 3,
+    explanation: "Cascade delete automatically deletes related rows in child tables when a row in the parent table is deleted.",
+    category: "Referential Integrity"
+  },
+  {
+    id: 5,
+    question: "A table named PlayerStat contains fields: PlayerID (INT, NOT NULL), TeamID (INT, NOT NULL), GameDate (DATETIME, NULL), Point (INT, NULL). You need to display the total number of points per player on the team whose ID is 1.",
+    options: [
+      "SELECT SUM(Point) FROM PlayerStat WHERE TeamID = 1 GROUP BY PlayerID",
+      "SELECT PlayerID, SUM(Point) FROM PlayerStat WHERE TeamID = 1 GROUP BY PlayerID",
+      "SELECT PlayerID, TeamID, SUM(Point) FROM PlayerStat GROUP BY TeamID",
+      "SELECT SUM(Point) FROM PlayerStat GROUP BY TeamID HAVING TeamID = 1"
+    ],
+    correctAnswer: 1,
+    explanation: "You need to select PlayerID and sum the points, filtering by TeamID = 1 and grouping by PlayerID.",
+    category: "SQL"
+  },
+  {
+    id: 6,
+    question: "You create a query to determine whether Sample Movie appears only once in the Movie table. The query returns a syntax error. What should you do?",
+    options: [
+      "Remove the group by clause",
+      "Change the having clause to having count(title) = 1",
+      "Remove the order by clause",
+      "Change the having clause to having count(1) = 1"
+    ],
+    correctAnswer: 2,
+    explanation: "ORDER BY must come after GROUP BY and HAVING clauses. Remove ORDER BY or move it to the end.",
+    category: "SQL"
+  },
+  {
+    id: 7,
+    question: "Which statement creates an index?",
+    options: [
+      "CREATE TABLE Employee (EmployeeID INTEGER DISTINCT)",
+      "CREATE TABLE Employee (EmployeeID INTEGER INDEX)",
+      "CREATE TABLE Employee (EmployeeID INTEGER PRIMARY KEY)",
+      "CREATE TABLE Employee (EmployeeID INTEGER NULL)"
+    ],
+    correctAnswer: 2,
+    explanation: "PRIMARY KEY automatically creates an index on that column.",
+    category: "Indexes"
+  },
+  {
+    id: 8,
+    question: "The Road table has RoadID as primary key. You execute: INSERT INTO Road VALUES (1234, 36). What is the result?",
+    options: [
+      "A new row in table",
+      "A syntax error",
+      "An error stating that null values are not allowed",
+      "An error stating that duplicate ids are not allowed"
+    ],
+    correctAnswer: 3,
+    explanation: "Since RoadID 1234 already exists, this will cause a primary key constraint violation (duplicate ID error).",
+    category: "Constraints"
+  },
+  {
+    id: 9,
+    question: "A stored procedure returns all null values when concatenating strings. What is likely the cause?",
+    options: [
+      "You must specify the NULLIF keyword",
+      "The plus (+) operator cannot be used to append character data",
+      "The Prefix or FirstName columns have null values",
+      "You must specify the join keyword"
+    ],
+    correctAnswer: 2,
+    explanation: "Concatenating NULL with any value results in NULL in SQL Server.",
+    category: "SQL"
+  },
+  {
+    id: 10,
+    question: "You are writing a SELECT statement to find every product whose name contains a specific character. Which keyword should you use in your WHERE clause?",
+    options: ["Like", "In", "Between", "Fetch"],
+    correctAnswer: 0,
+    explanation: "LIKE is used with wildcards (%) to search for patterns in strings.",
+    category: "SQL"
+  },
+  {
+    id: 11,
+    question: "Which feature does a relational database use to ensure that data entered into a column is valid?",
+    options: ["An attribute", "A primary key", "A constraint", "An index"],
+    correctAnswer: 2,
+    explanation: "Constraints (CHECK, NOT NULL, etc.) enforce data validity rules.",
+    category: "Constraints"
+  },
+  {
+    id: 12,
+    question: "You need to create a query that returns lastname, phonenumber and extension that are valid numbers, sorted by lastname.",
+    options: [
+      "SELECT Lastname, PhoneNumber, Extension FROM Customers WHERE PhoneNumber IS NOT NULL ORDER BY Lastname",
+      "SELECT Lastname, PhoneNumber, Extension FROM Customers WHERE Extension IS NOT NULL ORDER BY Lastname",
+      "SELECT Lastname, PhoneNumber, Extension FROM Customers WHERE PhoneNumber IS NOT NULL AND Extension IS NOT NULL ORDER BY Lastname",
+      "SELECT Lastname, PhoneNumber, Extension FROM Customers ORDER BY Lastname"
+    ],
+    correctAnswer: 2,
+    explanation: "Valid numbers require both PhoneNumber and Extension to be NOT NULL.",
+    category: "SQL"
+  },
+  {
+    id: 13,
+    question: "You have a table with one million rows. You search using: SELECT ProductName, Price FROM Product WHERE Category = 'Science Books'. What will make this search more efficient?",
+    options: [
+      "A clustered index on the ProductName column",
+      "A clustered index on the Price column",
+      "A non-clustered index on the Category column",
+      "A non-clustered on the Price column"
+    ],
+    correctAnswer: 2,
+    explanation: "A non-clustered index on the WHERE clause column (Category) will speed up the search.",
+    category: "Indexes"
+  },
+  {
+    id: 14,
+    question: "You join Customer and Order tables. The results show all customers and their orders, including customers who have no orders. Which type of join is this?",
+    options: ["Full join", "Partial join", "Inner join", "Complete join"],
+    correctAnswer: 0,
+    explanation: "A FULL JOIN (or LEFT JOIN for just customers with no orders) returns all records from both tables.",
+    category: "Joins"
+  },
+  {
+    id: 15,
+    question: "You need to display students who enrolled on or after June 1, 2020 OR graduated in 2020, ordered by enrollment date (most recent first).",
+    options: [
+      "SELECT * FROM student WHERE enrollment_date >= '2020-06-01' OR academic_status ='graduated' AND graduation_date >= '2020-01-01' ORDER BY enrollment_date DESC",
+      "SELECT * FROM student WHERE enrollment_date >= '2020-06-01' AND academic_status ='graduated' AND graduation_date >= '2020-01-01' ORDER BY enrollment_date ASC",
+      "SELECT * FROM student WHERE enrollment_date >= '2020-06-01' AND academic_status ='graduated' OR graduation_date >= '2020-01-01' ORDER BY enrollment_date",
+      "SELECT * FROM student WHERE enrollment_date >= '2020-06-01' OR academic_status ='graduated' OR graduation_date >= '2020-01-01' ORDER BY enrollment_date DESC"
+    ],
+    correctAnswer: 0,
+    explanation: "Use OR between conditions and ORDER BY ... DESC for most recent first.",
+    category: "SQL"
+  },
+  {
+    id: 16,
+    question: "Which statement should you use to remove a foreign key?",
+    options: ["Delete table", "Alter table", "Alter foreign key", "Delete foreign key"],
+    correctAnswer: 1,
+    explanation: "ALTER TABLE is used to modify table structure, including dropping foreign keys.",
+    category: "DDL"
+  },
+  {
+    id: 17,
+    question: "You need to select columns from Chapter and Language tables to create a composite primary key for the ChapterLanguage table. Which two columns should you select?",
+    options: ["ChapterID", "City", "Region", "LanguageName", "Country", "LanguageID"],
+    correctAnswer: 0,
+    explanation: "ChapterID and LanguageID would form the composite primary key for a junction table.",
+    category: "Keys"
+  },
+  {
+    id: 18,
+    question: "You want to store code that can be manually called any time. Which database object should you use?",
+    options: ["Stored procedure", "Function", "Trigger", "View"],
+    correctAnswer: 0,
+    explanation: "Stored procedures are reusable code blocks that can be called manually.",
+    category: "Stored Procedures"
+  },
+  {
+    id: 19,
+    question: "Which query will increase the price of item 1 by 6 percent?",
+    options: [
+      "USE Products SET Price = Price * 1.06 WHERE ItemNumber = 1",
+      "SET Price = Price * 1.06 FROM Products WHERE ItemNumber = 1",
+      "ALTER Products SET Price = Price * 1.06 WHERE ItemNumber = 1",
+      "UPDATE Products SET Price = Price * 1.06 WHERE ItemNumber = 1"
+    ],
+    correctAnswer: 3,
+    explanation: "UPDATE is the correct statement to modify existing data.",
+    category: "SQL"
+  },
+  {
+    id: 20,
+    question: "You need to delete a database table. Which DDL keyword should you use?",
+    options: ["Alter", "Delete", "Drop", "Truncate"],
+    correctAnswer: 2,
+    explanation: "DROP TABLE removes the entire table definition and data.",
+    category: "DDL"
+  },
+  {
+    id: 21,
+    question: "You execute: SELECT EmployeeID, FirstName, DepartmentName FROM Employee, Department. This operation is called a/an:",
+    options: ["Intersection", "Outer join", "Cartesian product", "Equi-join"],
+    correctAnswer: 2,
+    explanation: "Selecting from multiple tables without a JOIN condition creates a Cartesian product (all combinations).",
+    category: "Joins"
+  },
+  {
+    id: 22,
+    question: "You need to normalize a database to first normal form. Which two requirements must you meet?",
+    options: [
+      "Exclude repeating groups",
+      "Exclude foreign key",
+      "Exclude composite key",
+      "Exclude duplicate rows"
+    ],
+    correctAnswer: 0,
+    explanation: "1NF requires no repeating groups and no duplicate rows.",
+    category: "Normalization"
+  },
+  {
+    id: 23,
+    question: "Match data types: StudentName (string), GradeLevel (whole number), DaysAbsent (one decimal).",
+    options: [
+      "VARCHAR, INT, DECIMAL(3,1)",
+      "CHAR, INTEGER, FLOAT",
+      "TEXT, INT, DOUBLE",
+      "STRING, NUMBER, DECIMAL"
+    ],
+    correctAnswer: 0,
+    explanation: "VARCHAR for strings, INT for whole numbers, DECIMAL(3,1) for one decimal place.",
+    category: "Data Types"
+  },
+  {
+    id: 24,
+    question: "Which statement deletes rows where the employee's phone number is not entered?",
+    options: [
+      "DELETE FROM employee WHERE phone = NULL",
+      "DELETE FROM employee WHERE phone IS NULL",
+      "DELETE FROM employee WHERE phone IS NOT NULL",
+      "DELETE FROM employee WHERE phone = NULLABLE"
+    ],
+    correctAnswer: 1,
+    explanation: "IS NULL is the correct syntax to check for NULL values.",
+    category: "SQL"
+  },
+  {
+    id: 25,
+    question: "You execute: SELECT CustomerID, FirstName, DateJoined FROM Customer. How are rows organized?",
+    options: [
+      "In chronological order by DateJoined",
+      "In the order in which the rows were inserted",
+      "In no predictable order",
+      "In alphabetical order by FirstName"
+    ],
+    correctAnswer: 2,
+    explanation: "Without an ORDER BY clause, the order of results is not guaranteed.",
+    category: "SQL"
+  },
+  {
+    id: 26,
+    question: "You need to remove a view named EmployeeView. Which statement should you use?",
+    options: [
+      "DROP VIEW EmployeeView",
+      "DELETE EmployeeView",
+      "DELETE View EmployeeView",
+      "DROP EmployeeView"
+    ],
+    correctAnswer: 0,
+    explanation: "DROP VIEW is the correct syntax to remove a view.",
+    category: "DDL"
+  },
+  {
+    id: 27,
+    question: "Which SQL statement returns the country and number of orders where the number of orders is less than 50?",
+    options: [
+      "SELECT COUNT(OrderId), Country FROM Orders HAVING COUNT(OrderId) < 50 GROUP BY Country",
+      "SELECT Country, OrderId FROM Orders GROUP BY Country WHERE COUNT(OrderId) < 50",
+      "SELECT COUNT(OrderId), Country FROM Orders GROUP BY Country HAVING COUNT(OrderId) < 50",
+      "SELECT Country, OrderId FROM Orders WHERE Count(OrderId) < 50 GROUP BY Country"
+    ],
+    correctAnswer: 2,
+    explanation: "Use GROUP BY with HAVING to filter aggregated results.",
+    category: "SQL"
+  },
+  {
+    id: 28,
+    question: "Which database term describes the relationship between ProductID and ProductCategory?",
+    options: ["Deterministic", "Cohort", "Compositional", "Functionally dependent", "Relationally dependent"],
+    correctAnswer: 3,
+    explanation: "ProductCategory is functionally dependent on ProductID (each ProductID determines a ProductCategory).",
+    category: "Database Theory"
+  },
+  {
+    id: 29,
+    question: "You execute a transaction to delete 100 rows but it fails after 40 rows. What is the result?",
+    options: [
+      "The table will be corrupted",
+      "40 rows will be deleted from the table",
+      "No rows will be deleted from the Table",
+      "The transaction will restart"
+    ],
+    correctAnswer: 2,
+    explanation: "Transactions are atomic - either all changes are committed or none are (rollback on failure).",
+    category: "Transactions"
+  },
+  {
+    id: 30,
+    question: "What changes are needed to remove the SSN column from the Customers table?",
+    options: [
+      "ALTER TABLE Customers DELETE SSN",
+      "ALTER TABLE Customers DELETE COLUMN SSN",
+      "ALTER TABLE Customers DROP SSN",
+      "ALTER TABLE Customers DROP COLUMN SSN"
+    ],
+    correctAnswer: 3,
+    explanation: "DROP COLUMN is the correct syntax to remove a column.",
+    category: "DDL"
+  },
+  {
+    id: 31,
+    question: "You run a LEFT OUTER JOIN between Cars and Colors tables. How many rows are returned?",
+    options: ["0", "2", "3", "6"],
+    correctAnswer: 2,
+    explanation: "LEFT OUTER JOIN returns all rows from the left table (Cars has 3 rows).",
+    category: "Joins"
+  },
+  {
+    id: 32,
+    question: "Which two SQL keywords are valid to use in a CREATE TABLE statement?",
+    options: ["Order By", "Primary Key", "Insert Into", "Constraint"],
+    correctAnswer: 1,
+    explanation: "PRIMARY KEY and CONSTRAINT are valid in CREATE TABLE statements.",
+    category: "DDL"
+  },
+  {
+    id: 33,
+    question: "You need to display the address of the earliest 10 buildings that have been inspected.",
+    options: [
+      "SELECT TOP 10 Address FROM Building WHERE InspectionDate IS NOT NULL ORDER BY InspectionDate ASC",
+      "SELECT Address FROM Building WHERE InspectionDate IS NOT NULL ORDER BY InspectionDate ASC LIMIT 10",
+      "SELECT Address FROM Building ORDER BY InspectionDate LIMIT 10",
+      "SELECT TOP 10 Address FROM Building ORDER BY InspectionDate"
+    ],
+    correctAnswer: 0,
+    explanation: "Filter for non-null inspection dates, order by date ascending, and limit to 10.",
+    category: "SQL"
+  },
+  {
+    id: 34,
+    question: "Which query correctly returns orders where ship_state excludes Texas (TX) and Arizona (AZ)?",
+    options: [
+      "SELECT * FROM Orders WHERE NOT Ship_State = 'TX' AND NOT Ship_State = 'AZ'",
+      "SELECT * FROM Orders WHERE NOT Ship_State = 'TX' OR NOT Ship_State = 'AZ'",
+      "SELECT * FROM Orders WHERE Ship_State NOT = 'TX' AND Ship_State NOT = 'AZ'",
+      "SELECT * FROM Orders WHERE Ship_State NOT = 'TX' OR Ship_State NOT = 'AZ'"
+    ],
+    correctAnswer: 0,
+    explanation: "Use AND with NOT to exclude both conditions.",
+    category: "SQL"
+  },
+  {
+    id: 35,
+    question: "Select True or False: A full database backup is a copy of all of the data in the entire database.",
+    options: ["True", "False"],
+    correctAnswer: 0,
+    explanation: "A full backup copies all data in the database.",
+    category: "Backup"
+  },
+  {
+    id: 36,
+    question: "You need to create a view that returns an alphabetical list of game names. Which query should you use?",
+    options: [
+      "CREATE VIEW Mygames As SELECT Name FROM Games",
+      "CREATE VIEW Mygames As SELECT * FROM Games",
+      "CREATE VIEW Mygames As SELECT Name From Games ORDER BY Name",
+      "CREATE VIEW Mygames As SELECT * From Games Where Name BETWEEN 'A' AND 'Z'"
+    ],
+    correctAnswer: 2,
+    explanation: "ORDER BY Name will return the list in alphabetical order.",
+    category: "Views"
+  },
+  {
+    id: 37,
+    question: "One reason to create a stored procedure is to:",
+    options: [
+      "Minimize storage space",
+      "Improve performance",
+      "Give the user control of the query logic",
+      "Bypass case sensitivity requirements"
+    ],
+    correctAnswer: 1,
+    explanation: "Stored procedures are pre-compiled and can improve performance.",
+    category: "Stored Procedures"
+  },
+  {
+    id: 38,
+    question: "You need to ensure that an employee can be assigned to only an existing department. What should you apply?",
+    options: ["A foreign key", "A primary key", "An index", "A unique constraint", "A data type"],
+    correctAnswer: 0,
+    explanation: "A foreign key constraint ensures referential integrity between tables.",
+    category: "Keys"
+  },
+  {
+    id: 39,
+    question: "You need to populate a table named EmployeeCopy with data from an existing table named Employee.",
+    options: [
+      "Copy * Into Employee Select * From Employee",
+      "Select * Into EmployeeCopy Select * From Employee",
+      "Insert * From Employee Into EmployeeCopy",
+      "Insert Into EmployeeCopy Select * From Employee"
+    ],
+    correctAnswer: 3,
+    explanation: "INSERT INTO ... SELECT is the correct syntax to copy data between tables.",
+    category: "SQL"
+  },
+  {
+    id: 40,
+    question: "You need to display total number of orders, average line item total, highest line item total, and grand total.",
+    options: [
+      "SELECT MAX(LineItemTotal), AVG(LineItemTotal), COUNT(ID), SUM(LineItemTotal) FROM ItemsOnOrder HAVING ItemNumber, Quantity, UnitPrice",
+      "SELECT COUNT(ID), AVG(Unitprice+Quantity), MAX(UnitPrice+Quantity), SUM(UnitPrice+Quantity) FROM ItemOnOrder GROUP By ItemNumber, LineItemTotal",
+      "SELECT SUM(ID), AVG(LineItemTotal), MAX(LineItemTotal), SUM(LineItemTotal) FROM ItemOnOrder",
+      "SELECT COUNT(ID), AVG(LineItemTotal), MAX(LineItemTotal), SUM(LineItemTotal) FROM ItemOnOrder"
+    ],
+    correctAnswer: 3,
+    explanation: "Use aggregate functions without unnecessary GROUP BY or HAVING clauses.",
+    category: "SQL"
+  },
+  {
+    id: 41,
+    question: "You need to delete the record from Customer table that has CustomerID of 12345.",
+    options: [
+      "DELETE CustomerID FORM Customer WHERE CustomerID = 12345",
+      "DELETE FROM Customer WHERE CustomerID = 12345",
+      "UPDATE Customer DELETE * WHERE CustomerID = 12345",
+      "UPDATE CustomerID FROM Customer DELETE * WHERE CustomerID = 12345"
+    ],
+    correctAnswer: 1,
+    explanation: "DELETE FROM table WHERE condition is the correct syntax.",
+    category: "SQL"
+  },
+  {
+    id: 42,
+    question: "You execute: INSERT INTO Product VALUES (3296, 'Table', 4444). ProductID is primary key. What is the result?",
+    options: [
+      "A new row in the Product table",
+      "A syntax error",
+      "A foreign key constraint violation",
+      "A new row in the Category table",
+      "A primary key constraint violation"
+    ],
+    correctAnswer: 4,
+    explanation: "ProductID 3296 already exists, so this will cause a primary key constraint violation.",
+    category: "Constraints"
+  },
+  {
+    id: 43,
+    question: "You delete rows in Order table and corresponding rows in OrderItem are automatically deleted. This is:",
+    options: ["Waterfall delete", "Inherited delete", "Cascade delete", "Domino delete", "Functional delete"],
+    correctAnswer: 2,
+    explanation: "This is the definition of CASCADE DELETE.",
+    category: "Referential Integrity"
+  },
+  {
+    id: 44,
+    question: "Which keyword combines results of two queries and returns only rows that appear in both result sets?",
+    options: ["UNION", "INTERSECT", "ALL", "JOIN"],
+    correctAnswer: 1,
+    explanation: "INTERSECT returns only rows common to both queries.",
+    category: "SQL"
+  },
+  {
+    id: 45,
+    question: "Harry in San Francisco returns books. Which statement correctly updates the table?",
+    options: [
+      "UPDATE LoanedBooks SET Books = 0 WHERE (Name = 'Harry' OR City = 'San Fransisco')",
+      "UPDATE LoanedBooks SET Books = 0 WHERE (Name In 'Harry', 'San Fransisco')",
+      "UPDATE LoanedBooks SET Books = 0 WHERE (Name = 'Harry' AND City = 'San Fransisco')",
+      "INSERT INTO LoanedBooks SET Books = 0 WHERE ID = 4"
+    ],
+    correctAnswer: 2,
+    explanation: "Use AND to match both Name = 'Harry' AND City = 'San Francisco'.",
+    category: "SQL"
+  },
+  {
+    id: 46,
+    question: "You delete all Furniture products from Product table. What happens to the view that shows Furniture products?",
+    options: ["Empty", "Deleted", "Unchanged", "Archived"],
+    correctAnswer: 0,
+    explanation: "The view will return an empty result set since the underlying data was deleted.",
+    category: "Views"
+  },
+  {
+    id: 47,
+    question: "Two tables with 3 rows each. A cross join without WHERE clause returns how many rows?",
+    options: ["0", "3", "6", "9"],
+    correctAnswer: 3,
+    explanation: "Cross join returns 3 x 3 = 9 rows (all combinations).",
+    category: "Joins"
+  },
+  {
+    id: 48,
+    question: "You need to create a new column named District in Customer table. Which statement?",
+    options: [
+      "ALTER TABLE Customer MODIFY (District INTEGER)",
+      "ALTER TABLE Customer ADD (INTEGER District)",
+      "ALTER TABLE Customer ADD (District INTEGER)",
+      "MODIFY TABLE Customer ADD (INTEGER District)"
+    ],
+    correctAnswer: 2,
+    explanation: "ALTER TABLE ... ADD (column datatype) is the correct syntax.",
+    category: "DDL"
+  },
+  {
+    id: 49,
+    question: "One difference between a function and a stored procedure is that a function:",
+    options: [
+      "Cannot accept parameters",
+      "Cannot contain a transaction",
+      "Must be called from a trigger",
+      "Must return a value"
+    ],
+    correctAnswer: 3,
+    explanation: "Functions must return a value, while stored procedures don't have to.",
+    category: "Stored Procedures"
+  },
+  {
+    id: 50,
+    question: "Which SQL statement is a data manipulation language (DML) statement?",
+    options: [
+      "ALTER TABLE Employee ADD EmployeeName Varchar",
+      "SELECT EmployeeName FROM Employee WHERE EmployeeName = 'Jack Smith'",
+      "SELECT * INTO Employee FROM NewHires INSERT INTO Employee",
+      "VALUES ('Jack Smith')"
+    ],
+    correctAnswer: 1,
+    explanation: "SELECT is a DML statement. ALTER is DDL.",
+    category: "SQL"
+  },
+  {
+    id: 51,
+    question: "Which column prevents the table from being in third normal form?",
+    options: ["PetID", "Birthdate", "ID", "Year"],
+    correctAnswer: 1,
+    explanation: "Birthdate can be determined from PetID (transitive dependency), violating 3NF.",
+    category: "Normalization"
+  },
+  {
+    id: 52,
+    question: "Select True or False: You can delete data by using a stored procedure.",
+    options: ["True", "False"],
+    correctAnswer: 0,
+    explanation: "Stored procedures can contain DELETE statements.",
+    category: "Stored Procedures"
+  },
+  {
+    id: 53,
+    question: "Which syntax should you use to create a Student table?",
+    options: [
+      "CREATE TABLE Student(ID INT, Name VARCHAR (100), Age INT)",
+      "CREATE Student(ID INT, Name VARCHAR (100), Age INT)",
+      "CREATE TABLE (ID INT, Name VARCHAR (100), Age INT)",
+      "CREATE (TABLE Student ID INT, Name VARCHAR (100),"
+    ],
+    correctAnswer: 0,
+    explanation: "CREATE TABLE tablename (columns) is the correct syntax.",
+    category: "DDL"
+  },
+  {
+    id: 54,
+    question: "You need to disable User1's access to view data in Customer table. Which statement?",
+    options: [
+      "REVOKE User1 FROM Customer",
+      "REVOKE SELECT ON Customer FROM User1",
+      "REMOVE SELECT ON Customer FROM User1",
+      "REMOVE User1 FROM Customer"
+    ],
+    correctAnswer: 1,
+    explanation: "REVOKE permission ON table FROM user is the correct syntax.",
+    category: "Security"
+  },
+  {
+    id: 55,
+    question: "Which two SQL statements can you use to insert a record into a table?",
+    options: [
+      "INSERT INTO AddressInfo ('1234 Main Street', 'Dallas', 'TX', '75201') VALUES ([StreetAddress], [City], [State], [PostalCode])",
+      "INSERT INTO AddressInfo VALUES ('1234 Main Street', 'Dallas', 'TX', '75201')",
+      "UPDATE AddressInfo SET [StreetAddress] = '123 Main Street', [City] = 'Dallas', [State] = 'TX', [PostalCode] = '75201'",
+      "INSERT INTO AddressInfo ([StreetAddress], [City], [State], [PostalCode]) VALUES ('1234 Main Street', 'Dallas', 'TX', '75201')"
+    ],
+    correctAnswer: 1,
+    explanation: "Both INSERT with VALUES only and INSERT with column list and VALUES are valid.",
+    category: "SQL"
+  },
+  {
+    id: 56,
+    question: "Your query using OUTER JOIN returns an error. How should you correct it?",
+    options: [
+      "SELECT students.name, courses.name FROM students INNER JOIN courses WHERE students.courseID = courses.courseID",
+      "SELECT students.name, courses.name FROM students INNER JOIN courses ON students.courseID = courses.coursesID",
+      "SELECT students.name,courses.name FROM students INNER JOIN ON students.courseID = courses.coursesID",
+      "SELECT students.name, courses.name FROM students INNER JOIN On courses WHERE students.courseID = courses.courseID"
+    ],
+    correctAnswer: 1,
+    explanation: "INNER JOIN uses ON, not WHERE, to specify the join condition.",
+    category: "Joins"
+  },
+  {
+    id: 57,
+    question: "Adding a NOT NULL column to an existing table with data causes an error. What is likely the cause?",
+    options: [
+      "The Person table is empty",
+      "You should run DROP CONSTRAINT first",
+      "The varchar(4) data type is invalid",
+      "The DEFAULT keyword should be used to specify a default value"
+    ],
+    correctAnswer: 3,
+    explanation: "When adding a NOT NULL column to a table with existing data, you need a DEFAULT value.",
+    category: "DDL"
+  },
+  {
+    id: 58,
+    question: "You execute: DELETE FROM Student on a table with 100 rows. What is the result?",
+    options: [
+      "All rows and the table definition will be deleted",
+      "All rows containing a NULL value will be deleted",
+      "All rows in the table will be deleted",
+      "You will receive an error message"
+    ],
+    correctAnswer: 2,
+    explanation: "DELETE FROM table without a WHERE clause deletes all rows but keeps the table structure.",
+    category: "SQL"
+  },
+  {
+    id: 59,
+    question: "Which term describes the relationship between ProductID and ProductCategory?",
+    options: ["Compositional", "Cohort", "Deterministic", "Relationally dependent", "Functionally dependent"],
+    correctAnswer: 4,
+    explanation: "ProductCategory is functionally dependent on ProductID.",
+    category: "Database Theory"
+  },
+  {
+    id: 60,
+    question: "You have SalesPerson and Sales tables. How do you ensure each Sales record has a valid salesperson?",
+    options: [
+      "Create a foreign key on Sales.SalesPersonID referencing SalesPerson.SalesPersonID",
+      "Create a primary key on Sales.SalesPersonID",
+      "Create a unique constraint on SalesPerson.SalesPersonID",
+      "Create a check constraint on Sales.SalesPersonID"
+    ],
+    correctAnswer: 0,
+    explanation: "A foreign key constraint ensures referential integrity between Sales and SalesPerson.",
+    category: "Keys"
+  },
+  // Reviewer 2 - Questions 61-120
+  {
+    id: 61,
+    question: "You need one column to record what time of day a user has taken an exam with time zone awareness. What data type?",
+    options: ["datetime", "datetimeoffset", "datetime2", "Use two columns"],
+    correctAnswer: 1,
+    explanation: "datetimeoffset includes time zone information.",
+    category: "Data Types"
+  },
+  {
+    id: 62,
+    question: "Views are database objects that contain all of the data in a database. Is this correct?",
+    options: ["Tables", "No change is needed", "Queries", "Stored procedures"],
+    correctAnswer: 0,
+    explanation: "Tables contain the data, not views. Views are virtual tables based on queries.",
+    category: "Views"
+  },
+  {
+    id: 63,
+    question: "You run a LEFT OUTER JOIN between Cars and Colors tables. How many rows?",
+    options: ["6", "3", "0", "2"],
+    correctAnswer: 1,
+    explanation: "LEFT OUTER JOIN returns all rows from the left table (Cars has 3 rows).",
+    category: "Joins"
+  },
+  {
+    id: 64,
+    question: "The ________ model for database management is based on first-order predicate logic.",
+    options: ["Traditional", "Truncate", "Relational"],
+    correctAnswer: 2,
+    explanation: "The Relational model is based on first-order predicate logic.",
+    category: "Database Theory"
+  },
+  {
+    id: 65,
+    question: "Your server crashed and recovered. What will you do to ensure table structure and contents are proper?",
+    options: [
+      "Perform a table optimization operation",
+      "Perform a table repair operation",
+      "Perform a table check operation",
+      "Perform a table analysis operation"
+    ],
+    correctAnswer: 2,
+    explanation: "CHECK TABLE verifies the integrity of table structure and contents.",
+    category: "Maintenance"
+  },
+  {
+    id: 66,
+    question: "James wants to configure database access so users can only access their department's database. What should he do?",
+    options: [
+      "Create Windows Authentication login for each domain group, configure as database users, add to db_datareader and db_datawriter roles",
+      "Create Windows Authentication login for each domain user, configure as database users, add to db_ddladmin role",
+      "Create Windows Authentication login for each domain user, configure as database users, add to db_datareader and db_datawriter roles",
+      "Create Windows Authentication login for each domain group, configure as database users, add to db_ddladmin role"
+    ],
+    correctAnswer: 0,
+    explanation: "Use domain groups (not individual users) and assign db_datareader and db_datawriter roles.",
+    category: "Security"
+  },
+  {
+    id: 67,
+    question: "Which is the process of creating a design for the database that will support enterprise's operations?",
+    options: [
+      "Identifying relationships between objects",
+      "Database planning",
+      "Database design",
+      "Application design"
+    ],
+    correctAnswer: 2,
+    explanation: "Database design is the process of creating a database structure to support operations.",
+    category: "Database Design"
+  },
+  {
+    id: 68,
+    question: "You need to ensure system and MySQL time zones are based on the same information. Which statement?",
+    options: [
+      "shell> /usr/share/zoneinfo mysql_tzinfo_to_sql | mysql -u root mysql",
+      "shell> mysql_tzinfo_to_sql /usr/share/zoneinfo | mysql -u root mysql",
+      "shell> mysql_tz_to_sql /usr/share/zoneinfo | mysql -u root mysql",
+      "shell> /usr/share/zoneinfo mysql_tz_to_sql | mysql -u root mysql"
+    ],
+    correctAnswer: 1,
+    explanation: "mysql_tzinfo_to_sql converts zone files and pipes them to mysql.",
+    category: "Configuration"
+  },
+  {
+    id: 69,
+    question: "What is the ideal time to back up dynamic log files?",
+    options: [
+      "When the server is running",
+      "When the server is shut down",
+      "You can back up dynamic log files any time",
+      "When the server is stopped"
+    ],
+    correctAnswer: 1,
+    explanation: "Dynamic log files should be backed up when the server is shut down to ensure consistency.",
+    category: "Backup"
+  },
+  {
+    id: 70,
+    question: "CREATE DATABASE '24342' - What will be the output?",
+    options: [
+      "A database will be created",
+      "An error will be generated stating that a database name must begin with an alphabet and all alphabets should be in uppercase",
+      "An error will be generated stating that a database name should be a combination of numerals and alphabets",
+      "An error will be generated stating that a database name must begin with an alphabet"
+    ],
+    correctAnswer: 3,
+    explanation: "Database names must begin with a letter, not a number.",
+    category: "DDL"
+  },
+  {
+    id: 71,
+    question: "Which commands cannot be rolled back? (Choose two)",
+    options: ["UPDATE", "TRUNCATE", "COMMIT", "DELETE"],
+    correctAnswer: 1,
+    explanation: "TRUNCATE and COMMIT cannot be rolled back. TRUNCATE is DDL, COMMIT ends the transaction.",
+    category: "Transactions"
+  },
+  {
+    id: 72,
+    question: "Which are types of prototyping strategies? (Choose two)",
+    options: ["Physical prototyping", "Evolutionary prototyping", "Requirements prototyping", "Revolutionary prototyping"],
+    correctAnswer: 1,
+    explanation: "Evolutionary and Requirements prototyping are valid strategies.",
+    category: "Database Design"
+  },
+  {
+    id: 73,
+    question: "Which DML SQL statements support usage of correlated sub-queries? (Choose all that apply)",
+    options: ["SELECT", "INSERT", "UPDATE", "DELETE"],
+    correctAnswer: 0,
+    explanation: "SELECT, UPDATE, and DELETE can use correlated subqueries.",
+    category: "SQL"
+  },
+  {
+    id: 74,
+    question: "What is the relationship between foreign key and primary key? (Choose all that apply)",
+    options: [
+      "A foreign key and a primary key create a link between two entities",
+      "There is no relationship between a primary key and a foreign key",
+      "A foreign key ties attribute(s) of an entity to the primary key of another entity",
+      "A foreign key constraint works with a primary key constraint to enforce referential integrity"
+    ],
+    correctAnswer: 0,
+    explanation: "Foreign keys create links between tables and work with primary keys to enforce referential integrity.",
+    category: "Keys"
+  },
+  {
+    id: 75,
+    question: "What are the errors in: CREATE Product (ProductID Char(10) NOT NULL, OrderID Char(10) NULL, ProductName Varchar NOT NULL, Primary key (OrderID, ProductID))?",
+    options: [
+      "An attribute declared as a primary key cannot contain NULL values",
+      "Each attribute should be defined as a primary key separately",
+      "A table cannot have two primary keys",
+      "ProductName is declared as Varchar without specifying the width"
+    ],
+    correctAnswer: 0,
+    explanation: "OrderID is part of the primary key but allows NULL - primary key columns cannot be NULL. Also Varchar needs a width.",
+    category: "DDL"
+  },
+  {
+    id: 76,
+    question: "Which step in database planning records an object so it is represented visually?",
+    options: [
+      "Identifying relationships between objects",
+      "Gathering information",
+      "Object identification",
+      "Object modeling"
+    ],
+    correctAnswer: 3,
+    explanation: "Object modeling creates visual representations of database objects.",
+    category: "Database Design"
+  },
+  {
+    id: 77,
+    question: "ERROR 1251: Client does not support authentication protocol. What should you do without upgrading?",
+    options: [
+      "Run the server with the --secure-auth option",
+      "Run the server with the --old-password option",
+      "Run the server with the --allow-old option",
+      "Run the server with the --enable-old option"
+    ],
+    correctAnswer: 1,
+    explanation: "--old-password option enables backward compatibility with older clients.",
+    category: "Configuration"
+  },
+  {
+    id: 78,
+    question: "Which files store updates made after the backup?",
+    options: ["Binary log files", "My.cnf", "My.ini", "Master.info"],
+    correctAnswer: 0,
+    explanation: "Binary log files record all changes made to the database after a backup.",
+    category: "Backup"
+  },
+  {
+    id: 79,
+    question: "Which is a building working model of a database system?",
+    options: ["Prototyping", "Bottom-up approach", "Conceptual database design", "Top-down approach"],
+    correctAnswer: 0,
+    explanation: "Prototyping creates a working model of the database system.",
+    category: "Database Design"
+  },
+  {
+    id: 80,
+    question: "Which script converts Unix-type zone files into SQL statements and loads time zone tables?",
+    options: [
+      "mysql_time_to_sql",
+      "mysql_tzinfo_to_sql",
+      "mysql_tz_to_sql",
+      "mysql_timezone_to_sql"
+    ],
+    correctAnswer: 1,
+    explanation: "mysql_tzinfo_to_sql converts zone files to SQL statements.",
+    category: "Configuration"
+  },
+  {
+    id: 81,
+    question: "Which factors lead to defining an artificial key as primary key? (Choose all that apply)",
+    options: [
+      "The value of the primary key must be unique",
+      "The value of the primary key must be persistent",
+      "The value of the primary key cannot be NULL",
+      "The natural key contains highly sensitive data"
+    ],
+    correctAnswer: 3,
+    explanation: "Artificial keys are used when natural keys contain sensitive data like login/password.",
+    category: "Keys"
+  },
+  {
+    id: 82,
+    question: "Which statement removes an object from the RDBMS?",
+    options: ["CREATE", "SELECT", "ALTER", "DROP"],
+    correctAnswer: 3,
+    explanation: "DROP removes database objects.",
+    category: "DDL"
+  },
+  {
+    id: 83,
+    question: "Which will you use to create a database design that supports enterprise operations?",
+    options: [
+      "Requirements collection and analysis",
+      "Database planning",
+      "Database design",
+      "Application design"
+    ],
+    correctAnswer: 2,
+    explanation: "Database design creates the structure to support enterprise operations.",
+    category: "Database Design"
+  },
+  {
+    id: 84,
+    question: "You discover unauthorized changes through stored procedures. What should you do with least effort?",
+    options: [
+      "Parse input parameters to block single quotes",
+      "Customize stored procedures to use type-specific and length-restricted parameters",
+      "Replace stored procedures with ad hoc queries",
+      "Audit all data handling activity"
+    ],
+    correctAnswer: 1,
+    explanation: "Using type-specific and length-restricted parameters prevents SQL injection with minimal changes.",
+    category: "Security"
+  },
+  {
+    id: 85,
+    question: "Which enables users to use generic methods to access a database and focus on coding rather than syntax?",
+    options: ["Abstraction", "Database security", "Authentication", "Native auditing"],
+    correctAnswer: 0,
+    explanation: "Abstraction provides generic methods that hide database-specific syntax.",
+    category: "Database Theory"
+  },
+  {
+    id: 86,
+    question: "A regional center has many study centers. What is the relationship?",
+    options: ["Many-to-many", "One-to-one", "There is no relationship", "One-to-many"],
+    correctAnswer: 3,
+    explanation: "One regional center has many study centers = One-to-many relationship.",
+    category: "Relationships"
+  },
+  {
+    id: 87,
+    question: "Suzanne needs to decompose components but only to some extent. Which approach?",
+    options: ["Inside-out approach", "Mixed approach", "Top-down approach", "Bottom-up approach"],
+    correctAnswer: 1,
+    explanation: "Mixed approach combines top-down and bottom-up for partial decomposition.",
+    category: "Database Design"
+  },
+  {
+    id: 88,
+    question: "Which is used to give a default value to a column if the value is unknown?",
+    options: ["DEFAULT constraint", "Transaction", "Concurrency", "Nested transaction"],
+    correctAnswer: 0,
+    explanation: "DEFAULT constraint specifies a default value for a column.",
+    category: "Constraints"
+  },
+  {
+    id: 89,
+    question: "Which is a design of the user interface and application programs that use the database?",
+    options: ["Object Modeling", "Database Design", "Application Design", "Database Planning"],
+    correctAnswer: 2,
+    explanation: "Application Design covers UI and application programs that use the database.",
+    category: "Database Design"
+  },
+  {
+    id: 90,
+    question: "Management wants to prevent unauthorized data viewing using a cipher algorithm. Which will help?",
+    options: ["Authentication", "Encryption", "Native auditing", "Abstraction"],
+    correctAnswer: 1,
+    explanation: "Encryption uses cipher algorithms to protect data from unauthorized viewing.",
+    category: "Security"
+  },
+  {
+    id: 91,
+    question: "Which value cannot be stored in a character column defined as primary key?",
+    options: ["'0'", "null", "'null'", '""'],
+    correctAnswer: 1,
+    explanation: "Primary key columns cannot contain NULL values.",
+    category: "Keys"
+  },
+  {
+    id: 92,
+    question: "Which statement about external tables is true?",
+    options: [
+      "They can have indexes",
+      "They cannot be used in joins, views, and subqueries",
+      "They cannot be written to with DML commands",
+      "They can have constraints or triggers"
+    ],
+    correctAnswer: 2,
+    explanation: "External tables are read-only and cannot be modified with DML commands.",
+    category: "Tables"
+  },
+  {
+    id: 93,
+    question: "Which can be used to populate a table? (Choose all that apply)",
+    options: ["MERGE statement", "Data Pump", "INSERT statement", "SQL*Loader"],
+    correctAnswer: 2,
+    explanation: "INSERT, MERGE, Data Pump, and SQL*Loader can all populate tables.",
+    category: "SQL"
+  },
+  {
+    id: 94,
+    question: "For which tables will CHECK TABLE command work? (Choose two)",
+    options: ["FEDERATED", "MyISAM", "InnoDB", "MERGE"],
+    correctAnswer: 1,
+    explanation: "CHECK TABLE works with MyISAM and InnoDB tables.",
+    category: "Maintenance"
+  },
+  {
+    id: 95,
+    question: "Which are main approaches in database design? (Choose three)",
+    options: ["Inside-out approach", "Middle approach", "Top-down approach", "Bottom-up approach"],
+    correctAnswer: 0,
+    explanation: "Top-down, Bottom-up, and Inside-out are the main database design approaches.",
+    category: "Database Design"
+  },
+  {
+    id: 96,
+    question: "For highly sensitive data where security takes priority over speed, which protection technique?",
+    options: ["Native auditing", "Authentication", "Encryption", "Integrity controls"],
+    correctAnswer: 2,
+    explanation: "Encryption protects data even if unauthorized access is obtained.",
+    category: "Security"
+  },
+  {
+    id: 97,
+    question: "What prevents current operation from reading/writing data while it's being accessed by another operation?",
+    options: ["Deadlock", "Encryption", "Lock", "Constraint"],
+    correctAnswer: 2,
+    explanation: "Locks prevent concurrent access to data being used by another operation.",
+    category: "Concurrency"
+  },
+  {
+    id: 98,
+    question: "Orders table is queried for orders with sales total > $1000. What index type to use that's smallest?",
+    options: ["Filtered", "XML", "Non-clustered", "Clustered"],
+    correctAnswer: 0,
+    explanation: "Filtered indexes only index rows matching a predicate, making them smaller.",
+    category: "Indexes"
+  },
+  {
+    id: 99,
+    question: "John wants to insert records in a table with fixed format structure. Which data model?",
+    options: [
+      "Object relational data model",
+      "Network data model",
+      "Entity-Relationship Model",
+      "Relational model"
+    ],
+    correctAnswer: 3,
+    explanation: "Relational model uses fixed-format tables with rows and columns.",
+    category: "Database Theory"
+  },
+  {
+    id: 100,
+    question: "Which line has an error in: CREATE Table Production (Fruit_type VarChar, Fruit_name Char(20), Quantity Int(3))?",
+    options: ["Line 1", "Line 2", "Line 3", "Line 4"],
+    correctAnswer: 1,
+    explanation: "Line 2: VarChar needs a length specification like VarChar(50).",
+    category: "DDL"
+  },
+  // Additional questions from Reviewer 3
+  {
+    id: 101,
+    question: "JDBC API 2.0 defines five levels of transaction isolation. Which is the lowest level?",
+    options: [
+      "TRANSACTION_READ_COMMITTED",
+      "TRANSACTION_NONE",
+      "TRANSACTION_SERIALIZABLE",
+      "TRANSACTION_READ_UNCOMMITTED",
+      "TRANSACTION_REPEATABLE_READ"
+    ],
+    correctAnswer: 1,
+    explanation: "TRANSACTION_NONE is the lowest isolation level (no isolation).",
+    category: "Transactions"
+  },
+  {
+    id: 102,
+    question: "Which statement about rebuilding an index is true?",
+    options: [
+      "The NOLOGGING and ONLINE keywords can never be used together",
+      "The NOLOGGING and ONLINE keywords are always used together",
+      "Without the ONLINE keyword the index is locked for any DML operation",
+      "Without the ONLINE keyword the index is locked for the SELECT operation"
+    ],
+    correctAnswer: 2,
+    explanation: "Without ONLINE, the index is locked during rebuild, preventing DML operations.",
+    category: "Indexes"
+  },
+  {
+    id: 103,
+    question: "The UNION keyword combines results and returns only rows that appear in both result sets. Is this correct?",
+    options: ["INTERSECT", "JOIN", "No change is needed", "ALL"],
+    correctAnswer: 0,
+    explanation: "INTERSECT returns rows common to both queries. UNION returns all unique rows.",
+    category: "SQL"
+  },
+  {
+    id: 104,
+    question: "Which permission does a user need to run a stored procedure?",
+    options: ["RUN", "ALLOW", "EXECUTE", "CALL"],
+    correctAnswer: 2,
+    explanation: "EXECUTE permission is required to run stored procedures.",
+    category: "Security"
+  },
+  {
+    id: 105,
+    question: "Which keyword must be included in a CREATE VIEW statement?",
+    options: ["WHERE", "UPDATE", "ORDER BY", "SELECT"],
+    correctAnswer: 3,
+    explanation: "SELECT is required in a CREATE VIEW statement.",
+    category: "Views"
+  },
+  {
+    id: 106,
+    question: "What statement is used to copy records from one table into an existing table?",
+    options: ["SELECT", "SELECT WITHIN", "SELECT INTO", "INSERT INTO .. SELECT"],
+    correctAnswer: 3,
+    explanation: "INSERT INTO ... SELECT copies records into an existing table.",
+    category: "SQL"
+  },
+  {
+    id: 107,
+    question: "You need to use a transaction to ensure database has data integrity and referential integrity. Which statement?",
+    options: [
+      "BEGIN TRANSACTION, perform operations, then COMMIT or ROLLBACK",
+      "START TRANSACTION, perform operations, then SAVE",
+      "BEGIN, perform operations, then END TRANSACTION",
+      "OPEN TRANSACTION, perform operations, then CLOSE"
+    ],
+    correctAnswer: 0,
+    explanation: "Use BEGIN TRANSACTION with COMMIT or ROLLBACK for transaction control.",
+    category: "Transactions"
+  },
+  {
+    id: 108,
+    question: "Which type of index changes the order in which data is stored in a table?",
+    options: ["clustered", "non-clustered", "non-sequential", "sequential"],
+    correctAnswer: 0,
+    explanation: "Clustered indexes determine the physical order of data in a table.",
+    category: "Indexes"
+  },
+  {
+    id: 109,
+    question: "A key defines the amount of storage space allocated to a value in a column. Is this correct?",
+    options: ["validator", "data type", "No change is needed", "format"],
+    correctAnswer: 1,
+    explanation: "Data type defines the storage space, not the key.",
+    category: "Data Types"
+  },
+  {
+    id: 110,
+    question: "Which statement is true about referential integrity?",
+    options: [
+      "It checks that no component of a primary key can have a null value and no duplicate entries can exist",
+      "It distinguishes between null values and zero entries",
+      "It checks that no record in a child table can exist if its corresponding record is not available in the parent table",
+      "It checks that the value of a primary key must be consistent throughout the life of an instance"
+    ],
+    correctAnswer: 2,
+    explanation: "Referential integrity ensures child records have matching parent records.",
+    category: "Referential Integrity"
+  },
+  {
+    id: 111,
+    question: "First normal form requires that a database excludes:",
+    options: ["Duplicate rows", "Repeating groups", "Composite keys", "Foreign keys"],
+    correctAnswer: 1,
+    explanation: "1NF requires atomic values and no repeating groups.",
+    category: "Normalization"
+  },
+  {
+    id: 112,
+    question: "A regional center has many study centers. What is the relationship?",
+    options: ["There is no relationship", "One-to-one", "One-to-many", "Many-to-many"],
+    correctAnswer: 2,
+    explanation: "One regional center to many study centers = One-to-many.",
+    category: "Relationships"
+  },
+  {
+    id: 113,
+    question: "You want to disable connections from remote clients. Which step?",
+    options: [
+      "Start the server with the --shared-memory option",
+      "Start the server with the --secure-auth option",
+      "Start the server with the --skip-networking option",
+      "Start the server with the --disable-networking option"
+    ],
+    correctAnswer: 2,
+    explanation: "--skip-networking disables TCP/IP connections, allowing only local connections.",
+    category: "Configuration"
+  },
+  {
+    id: 114,
+    question: "You need to normalize recipe data to third normal form. How many tables?",
+    options: ["1", "3", "2", "4"],
+    correctAnswer: 1,
+    explanation: "Typically 3 tables: one for recipes, one for ingredients, and a junction table.",
+    category: "Normalization"
+  },
+  {
+    id: 115,
+    question: "Which statement ensures system and MySQL time zones use the same information?",
+    options: [
+      "shell> mysql_tz_to_sql /usr/share/zoneinfo | mysql -u root mysql",
+      "shell> /usr/share/zoneinfo mysql_tzinfo_to_sql | mysql -u root mysql",
+      "shell> /usr/share/zoneinfo mysql_tz_to_sql | mysql -u root mysql",
+      "shell> mysql_tzinfo_to_sql /usr/share/zoneinfo | mysql -u root mysql"
+    ],
+    correctAnswer: 3,
+    explanation: "mysql_tzinfo_to_sql converts zone files and pipes to mysql.",
+    category: "Configuration"
+  },
+  {
+    id: 116,
+    question: "What is not allowed in object names in SQL?",
+    options: ["special characters", "symbols", "spaces", "numbers"],
+    correctAnswer: 2,
+    explanation: "Spaces are not allowed in SQL object names without quoting.",
+    category: "SQL"
+  },
+  {
+    id: 117,
+    question: "You need to create a data model independent of a particular DBMS. Which design?",
+    options: ["Application design", "Physical database design", "Logical database design", "Conceptual database design"],
+    correctAnswer: 2,
+    explanation: "Logical database design is independent of any specific DBMS.",
+    category: "Database Design"
+  },
+  {
+    id: 118,
+    question: "Which are the main approaches in database design? (Choose three)",
+    options: ["Top-down approach", "Bottom-up approach", "Middle approach", "Inside-out approach"],
+    correctAnswer: 0,
+    explanation: "Top-down, Bottom-up, and Inside-out are the main approaches.",
+    category: "Database Design"
+  },
+  {
+    id: 119,
+    question: "Data combined from three tables with redundancy to optimize read performance has been:",
+    options: ["No change is needed", "Indexed", "Normalized", "Truncated"],
+    correctAnswer: 0,
+    explanation: "This describes denormalization - intentionally adding redundancy for performance.",
+    category: "Normalization"
+  },
+  {
+    id: 120,
+    question: "You need to retrieve only song names that sold more than 1000 CDs. Which query?",
+    options: [
+      "SELECT SongName FROM SongInformation WHERE CDsSold > 1000",
+      "SELECT * FROM SongInformation WHERE CDsSold >= 1000",
+      "SELECT SongName FROM SongInformation HAVING CDsSold > 1000",
+      "SELECT SongName FROM SongInformation WHERE CDsSold > 1000 ORDER BY SongName"
+    ],
+    correctAnswer: 0,
+    explanation: "Use WHERE clause to filter for CDsSold > 1000 and select only SongName.",
+    category: "SQL"
+  },
+  // Additional Questions 121-300
+  {
+    id: 121,
+    question: "What is the purpose of the SQL GROUP BY clause?",
+    options: [
+      "To sort the result set",
+      "To group rows that have the same values in specified columns",
+      "To filter rows based on a condition",
+      "To join two tables"
+    ],
+    correctAnswer: 1,
+    explanation: "GROUP BY groups rows with the same values in specified columns, typically used with aggregate functions.",
+    category: "SQL"
+  },
+  {
+    id: 122,
+    question: "Which SQL function returns the number of rows in a table?",
+    options: ["SUM()", "COUNT()", "AVG()", "TOTAL()"],
+    correctAnswer: 1,
+    explanation: "COUNT() returns the number of rows that match a specified criterion.",
+    category: "SQL"
+  },
+  {
+    id: 123,
+    question: "What is a database schema?",
+    options: [
+      "A type of database index",
+      "The logical structure and organization of a database",
+      "A backup of the database",
+      "A database user account"
+    ],
+    correctAnswer: 1,
+    explanation: "A database schema defines the logical structure, including tables, fields, relationships, and constraints.",
+    category: "Database Fundamentals"
+  },
+  {
+    id: 124,
+    question: "Which SQL clause is used to filter grouped results?",
+    options: ["WHERE", "HAVING", "GROUP BY", "ORDER BY"],
+    correctAnswer: 1,
+    explanation: "HAVING is used to filter results after grouping, while WHERE filters before grouping.",
+    category: "SQL"
+  },
+  {
+    id: 125,
+    question: "What is the difference between DELETE and TRUNCATE?",
+    options: [
+      "DELETE is faster than TRUNCATE",
+      "TRUNCATE removes all rows and cannot be rolled back; DELETE can be rolled back",
+      "DELETE removes the table structure; TRUNCATE keeps it",
+      "There is no difference"
+    ],
+    correctAnswer: 1,
+    explanation: "TRUNCATE removes all rows without logging individual deletions and typically cannot be rolled back.",
+    category: "SQL"
+  },
+  {
+    id: 126,
+    question: "What is database normalization?",
+    options: [
+      "Compressing database files",
+      "Organizing data to reduce redundancy and improve integrity",
+      "Creating database backups",
+      "Optimizing query performance"
+    ],
+    correctAnswer: 1,
+    explanation: "Normalization organizes data to minimize redundancy and dependency.",
+    category: "Normalization"
+  },
+  {
+    id: 127,
+    question: "What is the purpose of a database transaction?",
+    options: [
+      "To speed up queries",
+      "To ensure data integrity by treating multiple operations as a single unit",
+      "To create database backups",
+      "To manage user permissions"
+    ],
+    correctAnswer: 1,
+    explanation: "Transactions ensure ACID properties - operations either complete entirely or not at all.",
+    category: "Transactions"
+  },
+  {
+    id: 128,
+    question: "Which of the following is NOT an ACID property?",
+    options: ["Atomicity", "Consistency", "Isolation", "Availability"],
+    correctAnswer: 3,
+    explanation: "ACID stands for Atomicity, Consistency, Isolation, Durability. Availability is not part of ACID.",
+    category: "Transactions"
+  },
+  {
+    id: 129,
+    question: "What is a database deadlock?",
+    options: [
+      "When a database server crashes",
+      "When two transactions wait indefinitely for each other to release locks",
+      "When a query takes too long to execute",
+      "When the database runs out of storage"
+    ],
+    correctAnswer: 1,
+    explanation: "A deadlock occurs when two or more transactions block each other by holding locks the others need.",
+    category: "Concurrency"
+  },
+  {
+    id: 130,
+    question: "Which SQL statement is used to modify existing data in a table?",
+    options: ["MODIFY", "UPDATE", "ALTER", "CHANGE"],
+    correctAnswer: 1,
+    explanation: "UPDATE is used to modify existing records in a table.",
+    category: "SQL"
+  },
+  {
+    id: 131,
+    question: "What is a composite key?",
+    options: [
+      "A key made of encrypted data",
+      "A primary key consisting of two or more columns",
+      "A foreign key that references multiple tables",
+      "A key that automatically increments"
+    ],
+    correctAnswer: 1,
+    explanation: "A composite key is a primary key composed of multiple columns to uniquely identify a record.",
+    category: "Keys"
+  },
+  {
+    id: 132,
+    question: "Which SQL keyword is used to combine rows from two or more tables?",
+    options: ["COMBINE", "MERGE", "JOIN", "UNION"],
+    correctAnswer: 2,
+    explanation: "JOIN is used to combine rows from two or more tables based on a related column.",
+    category: "Joins"
+  },
+  {
+    id: 133,
+    question: "What is the difference between INNER JOIN and LEFT JOIN?",
+    options: [
+      "INNER JOIN returns all rows; LEFT JOIN returns only matching rows",
+      "LEFT JOIN returns all rows from the left table and matching rows from the right; INNER JOIN returns only matching rows",
+      "There is no difference",
+      "INNER JOIN is faster than LEFT JOIN"
+    ],
+    correctAnswer: 1,
+    explanation: "LEFT JOIN returns all records from the left table and matched records from the right; unmatched right records are NULL.",
+    category: "Joins"
+  },
+  {
+    id: 134,
+    question: "What is database sharding?",
+    options: [
+      "Breaking a database into smaller, faster, more easily managed parts",
+      "Encrypting database files",
+      "Creating database backups",
+      "Optimizing query performance"
+    ],
+    correctAnswer: 0,
+    explanation: "Sharding horizontally partitions data across multiple servers to improve scalability.",
+    category: "Database Design"
+  },
+  {
+    id: 135,
+    question: "Which SQL function returns the maximum value in a column?",
+    options: ["HIGHEST()", "TOP()", "MAX()", "PEAK()"],
+    correctAnswer: 2,
+    explanation: "MAX() returns the maximum value in a specified column.",
+    category: "SQL"
+  },
+  {
+    id: 136,
+    question: "What is a database view?",
+    options: [
+      "A physical table in the database",
+      "A virtual table based on the result of a SQL query",
+      "A database backup",
+      "A type of database index"
+    ],
+    correctAnswer: 1,
+    explanation: "A view is a virtual table that displays data from one or more tables based on a query.",
+    category: "Views"
+  },
+  {
+    id: 137,
+    question: "Which SQL statement adds a new column to an existing table?",
+    options: [
+      "MODIFY TABLE ADD COLUMN",
+      "ALTER TABLE ADD COLUMN",
+      "UPDATE TABLE ADD COLUMN",
+      "CHANGE TABLE ADD COLUMN"
+    ],
+    correctAnswer: 1,
+    explanation: "ALTER TABLE ADD COLUMN is used to add a new column to an existing table.",
+    category: "DDL"
+  },
+  {
+    id: 138,
+    question: "What is database replication?",
+    options: [
+      "Creating multiple copies of data across different servers",
+      "Compressing database files",
+      "Encrypting database data",
+      "Creating database indexes"
+    ],
+    correctAnswer: 0,
+    explanation: "Replication copies data to multiple servers for redundancy, availability, and performance.",
+    category: "Database Design"
+  },
+  {
+    id: 139,
+    question: "Which SQL clause sorts the result set?",
+    options: ["SORT BY", "ORDER BY", "ARRANGE BY", "GROUP BY"],
+    correctAnswer: 1,
+    explanation: "ORDER BY sorts the result set in ascending or descending order.",
+    category: "SQL"
+  },
+  {
+    id: 140,
+    question: "What is a database trigger?",
+    options: [
+      "A type of database index",
+      "A stored procedure that automatically executes in response to certain events",
+      "A database backup mechanism",
+      "A user permission setting"
+    ],
+    correctAnswer: 1,
+    explanation: "Triggers are special stored procedures that execute automatically when specified database events occur.",
+    category: "Stored Procedures"
+  },
+  {
+    id: 141,
+    question: "What does SQL stand for?",
+    options: [
+      "Structured Query Language",
+      "Simple Query Language",
+      "Standard Query Language",
+      "System Query Language"
+    ],
+    correctAnswer: 0,
+    explanation: "SQL stands for Structured Query Language.",
+    category: "Database Fundamentals"
+  },
+  {
+    id: 142,
+    question: "Which SQL operator is used to search for a pattern?",
+    options: ["PATTERN", "LIKE", "MATCH", "SEARCH"],
+    correctAnswer: 1,
+    explanation: "LIKE is used with wildcards (% and _) to search for patterns in strings.",
+    category: "SQL"
+  },
+  {
+    id: 143,
+    question: "What is a database cursor?",
+    options: [
+      "A pointer to a specific row in a result set",
+      "A type of database index",
+      "A database backup tool",
+      "A user interface element"
+    ],
+    correctAnswer: 0,
+    explanation: "A cursor is a pointer that enables traversal over the rows of a result set.",
+    category: "SQL"
+  },
+  {
+    id: 144,
+    question: "Which SQL statement removes all records from a table but keeps the structure?",
+    options: ["DELETE", "DROP", "TRUNCATE", "REMOVE"],
+    correctAnswer: 2,
+    explanation: "TRUNCATE removes all rows from a table but preserves the table structure.",
+    category: "SQL"
+  },
+  {
+    id: 145,
+    question: "What is database denormalization?",
+    options: [
+      "Removing all indexes from a database",
+      "Adding redundancy to improve read performance",
+      "Encrypting database data",
+      "Creating database backups"
+    ],
+    correctAnswer: 1,
+    explanation: "Denormalization intentionally adds redundancy to improve query performance at the cost of storage.",
+    category: "Normalization"
+  },
+  {
+    id: 146,
+    question: "Which SQL function calculates the average of a column?",
+    options: ["MEAN()", "AVERAGE()", "AVG()", "MEDIAN()"],
+    correctAnswer: 2,
+    explanation: "AVG() returns the average value of a numeric column.",
+    category: "SQL"
+  },
+  {
+    id: 147,
+    question: "What is a database connection pool?",
+    options: [
+      "A group of database servers",
+      "A cache of database connections maintained for reuse",
+      "A database backup system",
+      "A type of database index"
+    ],
+    correctAnswer: 1,
+    explanation: "Connection pools maintain a cache of connections to reduce the overhead of establishing new connections.",
+    category: "Database Design"
+  },
+  {
+    id: 148,
+    question: "Which SQL keyword eliminates duplicate rows from results?",
+    options: ["UNIQUE", "DISTINCT", "DIFFERENT", "SEPARATE"],
+    correctAnswer: 1,
+    explanation: "DISTINCT removes duplicate values from the result set.",
+    category: "SQL"
+  },
+  {
+    id: 149,
+    question: "What is the purpose of database indexing?",
+    options: [
+      "To encrypt data",
+      "To speed up data retrieval operations",
+      "To backup data",
+      "To compress data"
+    ],
+    correctAnswer: 1,
+    explanation: "Indexes improve the speed of data retrieval operations on database tables.",
+    category: "Indexes"
+  },
+  {
+    id: 150,
+    question: "Which SQL statement creates a new database?",
+    options: [
+      "NEW DATABASE",
+      "CREATE DATABASE",
+      "MAKE DATABASE",
+      "ADD DATABASE"
+    ],
+    correctAnswer: 1,
+    explanation: "CREATE DATABASE is used to create a new database.",
+    category: "DDL"
+  },
+  {
+    id: 151,
+    question: "What is a database constraint?",
+    options: [
+      "A type of database table",
+      "A rule enforced on data columns to ensure data integrity",
+      "A database backup method",
+      "A user access control"
+    ],
+    correctAnswer: 1,
+    explanation: "Constraints enforce rules at the column level to maintain data integrity.",
+    category: "Constraints"
+  },
+  {
+    id: 152,
+    question: "Which constraint ensures a column cannot have NULL values?",
+    options: ["NOT EMPTY", "NOT NULL", "REQUIRED", "MANDATORY"],
+    correctAnswer: 1,
+    explanation: "NOT NULL constraint ensures a column must have a value and cannot be NULL.",
+    category: "Constraints"
+  },
+  {
+    id: 153,
+    question: "What is database partitioning?",
+    options: [
+      "Dividing a large table into smaller, more manageable pieces",
+      "Encrypting database files",
+      "Creating database backups",
+      "Managing user permissions"
+    ],
+    correctAnswer: 0,
+    explanation: "Partitioning divides large tables into smaller parts based on specific criteria for better performance.",
+    category: "Database Design"
+  },
+  {
+    id: 154,
+    question: "Which SQL function returns the current date?",
+    options: ["NOW()", "CURRENT()", "TODAY()", "DATE()"],
+    correctAnswer: 0,
+    explanation: "NOW() returns the current date and time.",
+    category: "SQL"
+  },
+  {
+    id: 155,
+    question: "What is a database sequence?",
+    options: [
+      "A list of database users",
+      "A database object that generates unique numeric values",
+      "A type of database index",
+      "A database backup schedule"
+    ],
+    correctAnswer: 1,
+    explanation: "Sequences generate unique numeric values, often used for auto-incrementing primary keys.",
+    category: "Database Fundamentals"
+  },
+  {
+    id: 156,
+    question: "Which SQL statement grants permissions to a user?",
+    options: ["ALLOW", "PERMIT", "GRANT", "GIVE"],
+    correctAnswer: 2,
+    explanation: "GRANT is used to give users specific permissions on database objects.",
+    category: "Security"
+  },
+  {
+    id: 157,
+    question: "What is database caching?",
+    options: [
+      "Storing frequently accessed data in memory for faster retrieval",
+      "Encrypting database files",
+      "Creating database backups",
+      "Compressing database data"
+    ],
+    correctAnswer: 0,
+    explanation: "Caching stores frequently accessed data in memory to reduce database load and improve performance.",
+    category: "Database Design"
+  },
+  {
+    id: 158,
+    question: "Which SQL clause limits the number of rows returned?",
+    options: ["RESTRICT", "LIMIT", "TOP", "MAXROWS"],
+    correctAnswer: 1,
+    explanation: "LIMIT restricts the number of rows returned in the result set.",
+    category: "SQL"
+  },
+  {
+    id: 159,
+    question: "What is a database migration?",
+    options: [
+      "Moving data from one server to another",
+      "Version-controlled changes to database schema",
+      "Creating database backups",
+      "Optimizing query performance"
+    ],
+    correctAnswer: 1,
+    explanation: "Migrations are version-controlled scripts that manage incremental changes to database schema.",
+    category: "Database Design"
+  },
+  {
+    id: 160,
+    question: "Which SQL function concatenates two strings?",
+    options: ["JOIN()", "MERGE()", "CONCAT()", "COMBINE()"],
+    correctAnswer: 2,
+    explanation: "CONCAT() joins two or more strings together.",
+    category: "SQL"
+  },
+  {
+    id: 161,
+    question: "What is the purpose of the SQL COMMIT statement?",
+    options: [
+      "To start a transaction",
+      "To save all changes made during a transaction",
+      "To cancel a transaction",
+      "To create a backup"
+    ],
+    correctAnswer: 1,
+    explanation: "COMMIT permanently saves all changes made during the current transaction.",
+    category: "Transactions"
+  },
+  {
+    id: 162,
+    question: "Which SQL statement undoes changes in a transaction?",
+    options: ["UNDO", "CANCEL", "ROLLBACK", "REVERT"],
+    correctAnswer: 2,
+    explanation: "ROLLBACK undoes all changes made during the current transaction.",
+    category: "Transactions"
+  },
+  {
+    id: 163,
+    question: "What is a database ETL process?",
+    options: [
+      "Extract, Transform, Load - moving data between systems",
+      "Encrypt, Transfer, Lock - security process",
+      "Execute, Test, Log - testing process",
+      "Edit, Transfer, Link - data linking"
+    ],
+    correctAnswer: 0,
+    explanation: "ETL (Extract, Transform, Load) is the process of moving data from source to destination systems.",
+    category: "Database Design"
+  },
+  {
+    id: 164,
+    question: "Which SQL operator tests for values within a range?",
+    options: ["IN", "BETWEEN", "RANGE", "WITHIN"],
+    correctAnswer: 1,
+    explanation: "BETWEEN selects values within a given range (inclusive).",
+    category: "SQL"
+  },
+  {
+    id: 165,
+    question: "What is a database surrogate key?",
+    options: [
+      "A key that replaces a foreign key",
+      "An artificial key used as a substitute for a natural key",
+      "A backup key for emergencies",
+      "A temporary key for testing"
+    ],
+    correctAnswer: 1,
+    explanation: "A surrogate key is an artificial identifier (like an auto-increment number) used instead of a natural key.",
+    category: "Keys"
+  },
+  {
+    id: 166,
+    question: "Which SQL statement removes a table from the database?",
+    options: ["DELETE TABLE", "REMOVE TABLE", "DROP TABLE", "CLEAR TABLE"],
+    correctAnswer: 2,
+    explanation: "DROP TABLE removes the table definition and all data from the database.",
+    category: "DDL"
+  },
+  {
+    id: 167,
+    question: "What is database load balancing?",
+    options: [
+      "Distributing database queries across multiple servers",
+      "Balancing the size of database tables",
+      "Creating equal-sized backups",
+      "Managing user permissions equally"
+    ],
+    correctAnswer: 0,
+    explanation: "Load balancing distributes workload across multiple database servers to improve performance.",
+    category: "Database Design"
+  },
+  {
+    id: 168,
+    question: "Which SQL function returns the length of a string?",
+    options: ["SIZE()", "LENGTH()", "LEN()", "COUNT()"],
+    correctAnswer: 1,
+    explanation: "LENGTH() returns the number of characters in a string.",
+    category: "SQL"
+  },
+  {
+    id: 169,
+    question: "What is a database orphan record?",
+    options: [
+      "A record with no primary key",
+      "A child record without a matching parent record",
+      "A deleted record",
+      "A duplicate record"
+    ],
+    correctAnswer: 1,
+    explanation: "An orphan record is a child record whose foreign key references a non-existent parent record.",
+    category: "Referential Integrity"
+  },
+  {
+    id: 170,
+    question: "Which SQL keyword creates an alias for a column or table?",
+    options: ["ALIAS", "AS", "NAME", "LABEL"],
+    correctAnswer: 1,
+    explanation: "AS is used to create an alias for a column or table name.",
+    category: "SQL"
+  },
+  {
+    id: 171,
+    question: "What is database failover?",
+    options: [
+      "Automatically switching to a backup server when primary fails",
+      "Creating database backups",
+      "Compressing database files",
+      "Optimizing query performance"
+    ],
+    correctAnswer: 0,
+    explanation: "Failover automatically switches to a standby server when the primary server fails.",
+    category: "Database Design"
+  },
+  {
+    id: 172,
+    question: "Which SQL function extracts part of a string?",
+    options: ["EXTRACT()", "SUBSTRING()", "PART()", "SECTION()"],
+    correctAnswer: 1,
+    explanation: "SUBSTRING() extracts a portion of a string based on position and length.",
+    category: "SQL"
+  },
+  {
+    id: 173,
+    question: "What is a database materialized view?",
+    options: [
+      "A view that stores query results physically",
+      "A virtual view that runs queries on demand",
+      "A type of database index",
+      "A database backup"
+    ],
+    correctAnswer: 0,
+    explanation: "Materialized views store query results physically and refresh periodically, unlike regular views.",
+    category: "Views"
+  },
+  {
+    id: 174,
+    question: "Which SQL statement revokes permissions from a user?",
+    options: ["DENY", "REMOVE", "REVOKE", "TAKE"],
+    correctAnswer: 2,
+    explanation: "REVOKE removes previously granted permissions from a user.",
+    category: "Security"
+  },
+  {
+    id: 175,
+    question: "What is database horizontal partitioning?",
+    options: [
+      "Dividing a table into rows across multiple servers",
+      "Dividing a table into columns",
+      "Creating database backups",
+      "Encrypting data horizontally"
+    ],
+    correctAnswer: 0,
+    explanation: "Horizontal partitioning (sharding) distributes rows of a table across multiple servers.",
+    category: "Database Design"
+  },
+  {
+    id: 176,
+    question: "Which SQL function rounds a number to a specified decimal place?",
+    options: ["TRUNCATE()", "ROUND()", "FORMAT()", "DECIMAL()"],
+    correctAnswer: 1,
+    explanation: "ROUND() rounds a numeric value to a specified number of decimal places.",
+    category: "SQL"
+  },
+  {
+    id: 177,
+    question: "What is a database checkpoint?",
+    options: [
+      "A point where all committed transactions are written to disk",
+      "A database backup point",
+      "A user login verification",
+      "A query optimization point"
+    ],
+    correctAnswer: 0,
+    explanation: "A checkpoint ensures all committed transactions are permanently written to disk.",
+    category: "Transactions"
+  },
+  {
+    id: 178,
+    question: "Which SQL operator selects values matching any value in a list?",
+    options: ["ANY", "IN", "MATCH", "LIST"],
+    correctAnswer: 1,
+    explanation: "IN allows you to specify multiple values in a WHERE clause.",
+    category: "SQL"
+  },
+  {
+    id: 179,
+    question: "What is database vertical partitioning?",
+    options: [
+      "Dividing a table into columns across different tables",
+      "Dividing a table into rows",
+      "Creating vertical backups",
+      "Encrypting columns"
+    ],
+    correctAnswer: 0,
+    explanation: "Vertical partitioning splits a table by columns, placing different columns in separate tables.",
+    category: "Database Design"
+  },
+  {
+    id: 180,
+    question: "Which SQL function converts a string to uppercase?",
+    options: ["UPPER()", "UCASE()", "TOUPPER()", "CAPITALIZE()"],
+    correctAnswer: 0,
+    explanation: "UPPER() converts all characters in a string to uppercase.",
+    category: "SQL"
+  },
+  {
+    id: 181,
+    question: "What is a database transaction log?",
+    options: [
+      "A record of all database modifications for recovery purposes",
+      "A list of database users",
+      "A query execution log",
+      "A backup schedule"
+    ],
+    correctAnswer: 0,
+    explanation: "Transaction logs record all changes to enable recovery and rollback operations.",
+    category: "Transactions"
+  },
+  {
+    id: 182,
+    question: "Which SQL clause performs a subquery?",
+    options: ["SUB", "INNER", "EXISTS", "NESTED"],
+    correctAnswer: 2,
+    explanation: "EXISTS tests for the existence of any record in a subquery.",
+    category: "SQL"
+  },
+  {
+    id: 183,
+    question: "What is database clustering?",
+    options: [
+      "Grouping multiple servers to work as a single system",
+      "Creating database indexes",
+      "Organizing data alphabetically",
+      "Compressing database files"
+    ],
+    correctAnswer: 0,
+    explanation: "Clustering connects multiple servers to provide high availability and load balancing.",
+    category: "Database Design"
+  },
+  {
+    id: 184,
+    question: "Which SQL function returns the minimum value in a column?",
+    options: ["MINIMUM()", "LOWEST()", "MIN()", "BOTTOM()"],
+    correctAnswer: 2,
+    explanation: "MIN() returns the minimum value in a specified column.",
+    category: "SQL"
+  },
+  {
+    id: 185,
+    question: "What is a database full-text index?",
+    options: [
+      "An index optimized for searching text content",
+      "A complete list of all indexes",
+      "An index of all table names",
+      "A backup of all indexes"
+    ],
+    correctAnswer: 0,
+    explanation: "Full-text indexes are optimized for fast text searches within large text fields.",
+    category: "Indexes"
+  },
+  {
+    id: 186,
+    question: "Which SQL statement modifies the structure of an existing table?",
+    options: ["MODIFY TABLE", "ALTER TABLE", "CHANGE TABLE", "UPDATE TABLE"],
+    correctAnswer: 1,
+    explanation: "ALTER TABLE modifies the structure of an existing table.",
+    category: "DDL"
+  },
+  {
+    id: 187,
+    question: "What is database archiving?",
+    options: [
+      "Moving old or infrequently accessed data to separate storage",
+      "Creating database backups",
+      "Encrypting database files",
+      "Deleting old data"
+    ],
+    correctAnswer: 0,
+    explanation: "Archiving moves older data to long-term storage to improve performance of active data.",
+    category: "Database Design"
+  },
+  {
+    id: 188,
+    question: "Which SQL function removes leading and trailing spaces from a string?",
+    options: ["TRIM()", "STRIP()", "CLEAN()", "REMOVE()"],
+    correctAnswer: 0,
+    explanation: "TRIM() removes leading and trailing whitespace from a string.",
+    category: "SQL"
+  },
+  {
+    id: 189,
+    question: "What is a database two-phase commit?",
+    options: [
+      "A protocol for coordinating distributed transactions",
+      "A backup method with two stages",
+      "A two-step query optimization",
+      "A dual-server configuration"
+    ],
+    correctAnswer: 0,
+    explanation: "Two-phase commit ensures all nodes in a distributed transaction agree before committing.",
+    category: "Transactions"
+  },
+  {
+    id: 190,
+    question: "Which SQL keyword combines the results of two queries without duplicates?",
+    options: ["MERGE", "COMBINE", "UNION", "JOIN"],
+    correctAnswer: 2,
+    explanation: "UNION combines results from two queries and removes duplicate rows.",
+    category: "SQL"
+  },
+  {
+    id: 191,
+    question: "What is database query optimization?",
+    options: [
+      "The process of making queries execute faster and more efficiently",
+      "Compressing database files",
+      "Creating database backups",
+      "Managing user permissions"
+    ],
+    correctAnswer: 0,
+    explanation: "Query optimization involves restructuring queries and using indexes to improve performance.",
+    category: "Database Design"
+  },
+  {
+    id: 192,
+    question: "Which SQL function returns the first non-null value from a list?",
+    options: ["FIRST()", "COALESCE()", "NVL()", "IFNULL()"],
+    correctAnswer: 1,
+    explanation: "COALESCE() returns the first non-null value in the argument list.",
+    category: "SQL"
+  },
+  {
+    id: 193,
+    question: "What is a database stored function?",
+    options: [
+      "A named database object that returns a single value",
+      "A type of database index",
+      "A database backup function",
+      "A user login function"
+    ],
+    correctAnswer: 0,
+    explanation: "Stored functions are routines that accept parameters, perform calculations, and return a value.",
+    category: "Stored Procedures"
+  },
+  {
+    id: 194,
+    question: "Which SQL statement creates an index on a table?",
+    options: [
+      "MAKE INDEX",
+      "CREATE INDEX",
+      "ADD INDEX",
+      "BUILD INDEX"
+    ],
+    correctAnswer: 1,
+    explanation: "CREATE INDEX creates an index on one or more columns of a table.",
+    category: "Indexes"
+  },
+  {
+    id: 195,
+    question: "What is database data warehousing?",
+    options: [
+      "A system for reporting and data analysis",
+      "A database backup facility",
+      "A data encryption method",
+      "A temporary data storage"
+    ],
+    correctAnswer: 0,
+    explanation: "Data warehouses are designed for query and analysis rather than transaction processing.",
+    category: "Database Design"
+  },
+  {
+    id: 196,
+    question: "Which SQL function returns the sum of a numeric column?",
+    options: ["ADD()", "TOTAL()", "SUM()", "PLUS()"],
+    correctAnswer: 2,
+    explanation: "SUM() returns the total sum of a numeric column.",
+    category: "SQL"
+  },
+  {
+    id: 197,
+    question: "What is a database deadlock detection?",
+    options: [
+      "Identifying when transactions are waiting for each other",
+      "Detecting database server crashes",
+      "Finding duplicate records",
+      "Identifying slow queries"
+    ],
+    correctAnswer: 0,
+    explanation: "Deadlock detection identifies circular wait conditions between transactions.",
+    category: "Concurrency"
+  },
+  {
+    id: 198,
+    question: "Which SQL clause specifies the table to select from?",
+    options: ["SELECT", "FROM", "WHERE", "TABLE"],
+    correctAnswer: 1,
+    explanation: "FROM specifies the table(s) from which to retrieve data.",
+    category: "SQL"
+  },
+  {
+    id: 199,
+    question: "What is database OLTP?",
+    options: [
+      "Online Transaction Processing - for day-to-day operations",
+      "Online Transfer Protocol - for data transfer",
+      "Optimized Table Processing - for query optimization",
+      "Object Linking and Transaction Processing"
+    ],
+    correctAnswer: 0,
+    explanation: "OLTP systems are designed for fast transaction processing in day-to-day operations.",
+    category: "Database Design"
+  },
+  {
+    id: 200,
+    question: "Which SQL function converts a value to a specific data type?",
+    options: ["CONVERT()", "CAST()", "CHANGE()", "TYPE()"],
+    correctAnswer: 1,
+    explanation: "CAST() converts a value from one data type to another.",
+    category: "SQL"
+  },
+  {
+    id: 201,
+    question: "What is a database primary purpose?",
+    options: [
+      "To store and organize data for efficient retrieval and manipulation",
+      "To create websites",
+      "To write programs",
+      "To send emails"
+    ],
+    correctAnswer: 0,
+    explanation: "Databases are designed to store, organize, and retrieve data efficiently.",
+    category: "Database Fundamentals"
+  },
+  {
+    id: 202,
+    question: "Which SQL keyword is used to add a record to a table?",
+    options: ["ADD", "INSERT", "APPEND", "PUT"],
+    correctAnswer: 1,
+    explanation: "INSERT INTO is used to add new records to a table.",
+    category: "SQL"
+  },
+  {
+    id: 203,
+    question: "What does a database management system (DBMS) do?",
+    options: [
+      "Manages hardware components",
+      "Provides an interface for users and applications to interact with databases",
+      "Creates operating systems",
+      "Manages network connections only"
+    ],
+    correctAnswer: 1,
+    explanation: "A DBMS provides tools for creating, managing, and querying databases.",
+    category: "Database Fundamentals"
+  },
+  {
+    id: 204,
+    question: "Which SQL clause filters records based on a condition?",
+    options: ["FILTER", "WHERE", "IF", "CONDITION"],
+    correctAnswer: 1,
+    explanation: "WHERE filters records based on specified conditions.",
+    category: "SQL"
+  },
+  {
+    id: 205,
+    question: "What is a table in a database?",
+    options: [
+      "A collection of related data organized in rows and columns",
+      "A type of database query",
+      "A database user interface",
+      "A backup file"
+    ],
+    correctAnswer: 0,
+    explanation: "A table is a structured collection of data organized in rows (records) and columns (fields).",
+    category: "Database Fundamentals"
+  },
+  {
+    id: 206,
+    question: "Which SQL keyword modifies existing records in a table?",
+    options: ["MODIFY", "CHANGE", "UPDATE", "EDIT"],
+    correctAnswer: 2,
+    explanation: "UPDATE modifies existing records in a table.",
+    category: "SQL"
+  },
+  {
+    id: 207,
+    question: "What is a record (row) in a database table?",
+    options: [
+      "A single column of data",
+      "A single complete set of related data fields",
+      "A database index",
+      "A table header"
+    ],
+    correctAnswer: 1,
+    explanation: "A record (row) contains a complete set of related data about one entity.",
+    category: "Database Fundamentals"
+  },
+  {
+    id: 208,
+    question: "Which SQL statement removes records from a table?",
+    options: ["REMOVE", "DELETE", "DROP", "CLEAR"],
+    correctAnswer: 1,
+    explanation: "DELETE removes records from a table based on a condition.",
+    category: "SQL"
+  },
+  {
+    id: 209,
+    question: "What is a field (column) in a database table?",
+    options: [
+      "A complete record of data",
+      "A single piece of information or attribute",
+      "A database query",
+      "A table relationship"
+    ],
+    correctAnswer: 1,
+    explanation: "A field (column) represents a single attribute or piece of information about records.",
+    category: "Database Fundamentals"
+  },
+  {
+    id: 210,
+    question: "Which SQL keyword retrieves data from a database?",
+    options: ["GET", "FETCH", "SELECT", "RETRIEVE"],
+    correctAnswer: 2,
+    explanation: "SELECT retrieves data from one or more tables.",
+    category: "SQL"
+  },
+  {
+    id: 211,
+    question: "What is data redundancy in databases?",
+    options: [
+      "Storing the same data in multiple places",
+      "Having too much data",
+      "Data backup systems",
+      "Data encryption"
+    ],
+    correctAnswer: 0,
+    explanation: "Data redundancy occurs when the same data is stored in multiple locations, which normalization aims to reduce.",
+    category: "Normalization"
+  },
+  {
+    id: 212,
+    question: "Which SQL keyword creates a new table?",
+    options: ["NEW", "MAKE", "CREATE", "BUILD"],
+    correctAnswer: 2,
+    explanation: "CREATE TABLE creates a new table in the database.",
+    category: "DDL"
+  },
+  {
+    id: 213,
+    question: "What is data integrity in databases?",
+    options: [
+      "The accuracy and consistency of data",
+      "The size of the database",
+      "The speed of queries",
+      "The number of users"
+    ],
+    correctAnswer: 0,
+    explanation: "Data integrity ensures data is accurate, consistent, and reliable throughout its lifecycle.",
+    category: "Database Fundamentals"
+  },
+  {
+    id: 214,
+    question: "Which SQL constraint ensures all values in a column are different?",
+    options: ["DIFFERENT", "DISTINCT", "UNIQUE", "SEPARATE"],
+    correctAnswer: 2,
+    explanation: "UNIQUE constraint ensures all values in a column are different.",
+    category: "Constraints"
+  },
+  {
+    id: 215,
+    question: "What is a relational database?",
+    options: [
+      "A database that stores data in tables with relationships between them",
+      "A database for storing family relationships",
+      "A database with only one table",
+      "A database without any structure"
+    ],
+    correctAnswer: 0,
+    explanation: "Relational databases organize data in tables with defined relationships between them.",
+    category: "Database Fundamentals"
+  },
+  {
+    id: 216,
+    question: "Which SQL keyword specifies sorting order as descending?",
+    options: ["DESC", "DOWN", "DECREASING", "REVERSE"],
+    correctAnswer: 0,
+    explanation: "DESC sorts results in descending (Z to A, high to low) order.",
+    category: "SQL"
+  },
+  {
+    id: 217,
+    question: "What is a database backup?",
+    options: [
+      "A copy of database data for recovery purposes",
+      "A database index",
+      "A database query",
+      "A database user"
+    ],
+    correctAnswer: 0,
+    explanation: "Backups are copies of data that can be used to restore the database in case of failure.",
+    category: "Backup"
+  },
+  {
+    id: 218,
+    question: "Which SQL function returns the current user?",
+    options: ["USER()", "CURRENT_USER()", "ME()", "WHO()"],
+    correctAnswer: 1,
+    explanation: "CURRENT_USER() returns the name of the current database user.",
+    category: "SQL"
+  },
+  {
+    id: 219,
+    question: "What is database recovery?",
+    options: [
+      "Restoring a database to a correct state after a failure",
+      "Deleting database records",
+      "Creating new tables",
+      "Optimizing queries"
+    ],
+    correctAnswer: 0,
+    explanation: "Database recovery restores data to a consistent state after hardware or software failures.",
+    category: "Backup"
+  },
+  {
+    id: 220,
+    question: "Which SQL keyword is used for pattern matching with wildcards?",
+    options: ["LIKE", "MATCH", "PATTERN", "SIMILAR"],
+    correctAnswer: 0,
+    explanation: "LIKE is used for pattern matching with % (multiple characters) and _ (single character) wildcards.",
+    category: "SQL"
+  },
+  {
+    id: 221,
+    question: "What is a database schema diagram?",
+    options: [
+      "A visual representation of database structure",
+      "A type of database query",
+      "A database backup file",
+      "A user manual"
+    ],
+    correctAnswer: 0,
+    explanation: "Schema diagrams visually represent tables, columns, and relationships in a database.",
+    category: "Database Design"
+  },
+  {
+    id: 222,
+    question: "Which SQL statement removes an index?",
+    options: ["DELETE INDEX", "REMOVE INDEX", "DROP INDEX", "CLEAR INDEX"],
+    correctAnswer: 2,
+    explanation: "DROP INDEX removes an existing index from a table.",
+    category: "Indexes"
+  },
+  {
+    id: 223,
+    question: "What is database concurrency control?",
+    options: [
+      "Managing simultaneous access to data by multiple users",
+      "Controlling database size",
+      "Managing user passwords",
+      "Controlling network access"
+    ],
+    correctAnswer: 0,
+    explanation: "Concurrency control manages simultaneous data access to maintain consistency.",
+    category: "Concurrency"
+  },
+  {
+    id: 224,
+    question: "Which SQL function returns a specified date part?",
+    options: ["DATEPART()", "EXTRACT()", "GETDATE()", "PART()"],
+    correctAnswer: 1,
+    explanation: "EXTRACT() retrieves a specific part (year, month, day) from a date.",
+    category: "SQL"
+  },
+  {
+    id: 225,
+    question: "What is a database entity?",
+    options: [
+      "A real-world object represented in a database",
+      "A database user",
+      "A type of query",
+      "A database backup"
+    ],
+    correctAnswer: 0,
+    explanation: "An entity is a real-world object or concept represented as a table in a database.",
+    category: "Database Fundamentals"
+  },
+  {
+    id: 226,
+    question: "Which SQL keyword creates a database user?",
+    options: ["NEW USER", "CREATE USER", "ADD USER", "MAKE USER"],
+    correctAnswer: 1,
+    explanation: "CREATE USER creates a new database user account.",
+    category: "Security"
+  },
+  {
+    id: 227,
+    question: "What is database authentication?",
+    options: [
+      "Verifying a user's identity before granting access",
+      "Encrypting database files",
+      "Creating database backups",
+      "Optimizing queries"
+    ],
+    correctAnswer: 0,
+    explanation: "Authentication verifies the identity of users attempting to access the database.",
+    category: "Security"
+  },
+  {
+    id: 228,
+    question: "Which SQL function returns the absolute value of a number?",
+    options: ["ABS()", "ABSOLUTE()", "POSITIVE()", "VALUE()"],
+    correctAnswer: 0,
+    explanation: "ABS() returns the absolute (positive) value of a number.",
+    category: "SQL"
+  },
+  {
+    id: 229,
+    question: "What is database authorization?",
+    options: [
+      "Granting specific permissions to authenticated users",
+      "Verifying user identity",
+      "Encrypting data",
+      "Creating backups"
+    ],
+    correctAnswer: 0,
+    explanation: "Authorization determines what actions an authenticated user is allowed to perform.",
+    category: "Security"
+  },
+  {
+    id: 230,
+    question: "Which SQL keyword begins a transaction?",
+    options: ["BEGIN", "START", "BEGIN TRANSACTION", "OPEN"],
+    correctAnswer: 2,
+    explanation: "BEGIN TRANSACTION marks the starting point of an explicit transaction.",
+    category: "Transactions"
+  },
+  {
+    id: 231,
+    question: "What is a database relationship cardinality?",
+    options: [
+      "The number of relationships between entities",
+      "The type of relationship (one-to-one, one-to-many, many-to-many)",
+      "The size of the database",
+      "The number of tables"
+    ],
+    correctAnswer: 1,
+    explanation: "Cardinality defines the type of relationship between entities (1:1, 1:N, M:N).",
+    category: "Relationships"
+  },
+  {
+    id: 232,
+    question: "Which SQL function checks if a value is null?",
+    options: ["ISNULL()", "IS NULL", "NULL()", "CHECKNULL()"],
+    correctAnswer: 1,
+    explanation: "IS NULL tests whether a value is NULL.",
+    category: "SQL"
+  },
+  {
+    id: 233,
+    question: "What is database data mining?",
+    options: [
+      "Discovering patterns in large datasets",
+      "Deleting old data",
+      "Creating database backups",
+      "Encrypting data"
+    ],
+    correctAnswer: 0,
+    explanation: "Data mining analyzes large datasets to discover patterns and relationships.",
+    category: "Database Design"
+  },
+  {
+    id: 234,
+    question: "Which SQL keyword adds a default value to a column?",
+    options: ["DEFAULT", "STANDARD", "INITIAL", "PRESET"],
+    correctAnswer: 0,
+    explanation: "DEFAULT specifies a default value for a column when no value is provided.",
+    category: "Constraints"
+  },
+  {
+    id: 235,
+    question: "What is a database surrogate key?",
+    options: [
+      "A system-generated unique identifier",
+      "A foreign key",
+      "A composite key",
+      "A primary key"
+    ],
+    correctAnswer: 0,
+    explanation: "Surrogate keys are artificial identifiers (like auto-increment numbers) with no business meaning.",
+    category: "Keys"
+  },
+  {
+    id: 236,
+    question: "Which SQL function returns the largest integer less than or equal to a number?",
+    options: ["FLOOR()", "CEILING()", "ROUND()", "TRUNC()"],
+    correctAnswer: 0,
+    explanation: "FLOOR() returns the largest integer less than or equal to the specified number.",
+    category: "SQL"
+  },
+  {
+    id: 237,
+    question: "What is database temporal data?",
+    options: [
+      "Data that changes over time and maintains historical versions",
+      "Temporary data storage",
+      "Data that is deleted after use",
+      "Data in temporary tables"
+    ],
+    correctAnswer: 0,
+    explanation: "Temporal data tracks changes over time and maintains historical versions of records.",
+    category: "Database Fundamentals"
+  },
+  {
+    id: 238,
+    question: "Which SQL keyword creates a temporary table?",
+    options: [
+      "CREATE TEMP TABLE",
+      "CREATE TEMPORARY TABLE",
+      "CREATE TEMP TABLE",
+      "CREATE #TABLE"
+    ],
+    correctAnswer: 1,
+    explanation: "CREATE TEMPORARY TABLE creates a table that exists only for the duration of the session.",
+    category: "DDL"
+  },
+  {
+    id: 239,
+    question: "What is database query caching?",
+    options: [
+      "Storing query results to speed up repeated queries",
+      "Creating database backups",
+      "Encrypting queries",
+      "Compressing data"
+    ],
+    correctAnswer: 0,
+    explanation: "Query caching stores results of frequently executed queries to improve performance.",
+    category: "Database Design"
+  },
+  {
+    id: 240,
+    question: "Which SQL function returns the smallest integer greater than or equal to a number?",
+    options: ["FLOOR()", "CEILING()", "ROUND()", "UP()"],
+    correctAnswer: 1,
+    explanation: "CEILING() returns the smallest integer greater than or equal to the specified number.",
+    category: "SQL"
+  },
+  {
+    id: 241,
+    question: "What is a database bitmap index?",
+    options: [
+      "An index using bitmaps for columns with low cardinality",
+      "An index for images",
+      "A compressed index",
+      "A temporary index"
+    ],
+    correctAnswer: 0,
+    explanation: "Bitmap indexes are efficient for columns with few distinct values (low cardinality).",
+    category: "Indexes"
+  },
+  {
+    id: 242,
+    question: "Which SQL keyword renames a table?",
+    options: [
+      "RENAME TABLE",
+      "ALTER TABLE RENAME",
+      "CHANGE TABLE NAME",
+      "RENAME TABLE TO"
+    ],
+    correctAnswer: 1,
+    explanation: "ALTER TABLE with RENAME is used to rename a table.",
+    category: "DDL"
+  },
+  {
+    id: 243,
+    question: "What is database horizontal scaling?",
+    options: [
+      "Adding more servers to distribute load",
+      "Adding more CPU/RAM to a single server",
+      "Compressing data",
+      "Creating indexes"
+    ],
+    correctAnswer: 0,
+    explanation: "Horizontal scaling adds more servers to handle increased load (scale out).",
+    category: "Database Design"
+  },
+  {
+    id: 244,
+    question: "Which SQL function returns the sign of a number?",
+    options: ["SIGN()", "POSITIVE()", "NEGATIVE()", "VALUE()"],
+    correctAnswer: 0,
+    explanation: "SIGN() returns -1 for negative, 0 for zero, and 1 for positive numbers.",
+    category: "SQL"
+  },
+  {
+    id: 245,
+    question: "What is database vertical scaling?",
+    options: [
+      "Adding more resources (CPU/RAM) to a single server",
+      "Adding more servers",
+      "Creating more tables",
+      "Adding more columns"
+    ],
+    correctAnswer: 0,
+    explanation: "Vertical scaling adds more resources to an existing server (scale up).",
+    category: "Database Design"
+  },
+  {
+    id: 246,
+    question: "Which SQL keyword creates a synonym for a table?",
+    options: ["CREATE SYNONYM", "CREATE ALIAS", "CREATE NICKNAME", "CREATE REFERENCE"],
+    correctAnswer: 0,
+    explanation: "CREATE SYNONYM creates an alternative name for a database object.",
+    category: "DDL"
+  },
+  {
+    id: 247,
+    question: "What is a database covering index?",
+    options: [
+      "An index that includes all columns needed for a query",
+      "An index that covers all tables",
+      "A backup index",
+      "A primary key index"
+    ],
+    correctAnswer: 0,
+    explanation: "A covering index includes all columns required by a query, eliminating the need to access the table.",
+    category: "Indexes"
+  },
+  {
+    id: 248,
+    question: "Which SQL function generates a random number?",
+    options: ["RANDOM()", "RAND()", "RND()", "RANDOMIZE()"],
+    correctAnswer: 1,
+    explanation: "RAND() returns a random floating-point value between 0 and 1.",
+    category: "SQL"
+  },
+  {
+    id: 249,
+    question: "What is database eventual consistency?",
+    options: [
+      "A model where updates propagate to all nodes eventually",
+      "Immediate consistency across all nodes",
+      "No consistency guarantees",
+      "Strong consistency only"
+    ],
+    correctAnswer: 0,
+    explanation: "Eventual consistency guarantees that if no new updates are made, all nodes will eventually have the same data.",
+    category: "Database Design"
+  },
+  {
+    id: 250,
+    question: "Which SQL keyword comments out a line?",
+    options: ["//", "/*", "--", "#"],
+    correctAnswer: 2,
+    explanation: "-- is used for single-line comments in SQL.",
+    category: "SQL"
+  },
+  {
+    id: 251,
+    question: "What is a database B-tree index?",
+    options: [
+      "A balanced tree structure for efficient data retrieval",
+      "A binary tree index",
+      "A backup tree structure",
+      "A bitmap tree index"
+    ],
+    correctAnswer: 0,
+    explanation: "B-tree indexes are balanced tree structures that enable efficient data retrieval operations.",
+    category: "Indexes"
+  },
+  {
+    id: 252,
+    question: "Which SQL function returns the ASCII value of a character?",
+    options: ["ASCII()", "CODE()", "VALUE()", "CHARCODE()"],
+    correctAnswer: 0,
+    explanation: "ASCII() returns the ASCII code value of the leftmost character of a string.",
+    category: "SQL"
+  },
+  {
+    id: 253,
+    question: "What is database strong consistency?",
+    options: [
+      "All nodes see the same data at the same time",
+      "Data is eventually consistent",
+      "No consistency guarantees",
+      "Data is only stored locally"
+    ],
+    correctAnswer: 0,
+    explanation: "Strong consistency ensures all nodes see the same data simultaneously after any update.",
+    category: "Database Design"
+  },
+  {
+    id: 254,
+    question: "Which SQL keyword creates a role?",
+    options: ["CREATE ROLE", "NEW ROLE", "ADD ROLE", "MAKE ROLE"],
+    correctAnswer: 0,
+    explanation: "CREATE ROLE creates a new database role for grouping permissions.",
+    category: "Security"
+  },
+  {
+    id: 255,
+    question: "What is a database hash index?",
+    options: [
+      "An index using a hash function for exact match lookups",
+      "An index for hashed passwords",
+      "A compressed index",
+      "A temporary index"
+    ],
+    correctAnswer: 0,
+    explanation: "Hash indexes use a hash function to map keys to locations, optimized for exact match queries.",
+    category: "Indexes"
+  },
+  {
+    id: 256,
+    question: "Which SQL function returns the character for an ASCII value?",
+    options: ["CHAR()", "CHR()", "ASCII_CHAR()", "FROM_ASCII()"],
+    correctAnswer: 0,
+    explanation: "CHAR() returns the character associated with the specified ASCII code.",
+    category: "SQL"
+  },
+  {
+    id: 257,
+    question: "What is database CAP theorem?",
+    options: [
+      "A theorem stating you can only guarantee two of Consistency, Availability, Partition tolerance",
+      "A theorem about database capacity",
+      "A theorem about query performance",
+      "A theorem about data compression"
+    ],
+    correctAnswer: 0,
+    explanation: "CAP theorem states that a distributed system can only guarantee two of: Consistency, Availability, and Partition tolerance.",
+    category: "Database Design"
+  },
+  {
+    id: 258,
+    question: "Which SQL keyword assigns a role to a user?",
+    options: ["GIVE ROLE", "ASSIGN ROLE", "GRANT ROLE", "ADD ROLE"],
+    correctAnswer: 2,
+    explanation: "GRANT ROLE assigns a role to a database user.",
+    category: "Security"
+  },
+  {
+    id: 259,
+    question: "What is a database inverted index?",
+    options: [
+      "An index optimized for full-text search",
+      "An index in reverse order",
+      "A backup index",
+      "A temporary index"
+    ],
+    correctAnswer: 0,
+    explanation: "Inverted indexes map content (like words) to their locations, optimized for full-text search.",
+    category: "Indexes"
+  },
+  {
+    id: 260,
+    question: "Which SQL function returns the position of a substring?",
+    options: ["POSITION()", "LOCATE()", "INSTR()", "FIND()"],
+    correctAnswer: 1,
+    explanation: "LOCATE() returns the position of the first occurrence of a substring in a string.",
+    category: "SQL"
+  },
+  {
+    id: 261,
+    question: "What is database BASE properties?",
+    options: [
+      "Basically Available, Soft state, Eventual consistency",
+      "Backup And Security Enabled",
+      "Basic Access Security Environment",
+      "Binary Application Storage Engine"
+    ],
+    correctAnswer: 0,
+    explanation: "BASE (Basically Available, Soft state, Eventual consistency) is an alternative to ACID for NoSQL databases.",
+    category: "Database Design"
+  },
+  {
+    id: 262,
+    question: "Which SQL keyword removes a role?",
+    options: ["DELETE ROLE", "REMOVE ROLE", "DROP ROLE", "CLEAR ROLE"],
+    correctAnswer: 2,
+    explanation: "DROP ROLE removes a database role.",
+    category: "Security"
+  },
+  {
+    id: 263,
+    question: "What is a database sparse index?",
+    options: [
+      "An index with entries only for some records",
+      "An index for sparse data",
+      "A compressed index",
+      "A temporary index"
+    ],
+    correctAnswer: 0,
+    explanation: "Sparse indexes have entries only for some records, reducing index size.",
+    category: "Indexes"
+  },
+  {
+    id: 264,
+    question: "Which SQL function replaces occurrences of a substring?",
+    options: ["REPLACE()", "SUBSTITUTE()", "CHANGE()", "SWAP()"],
+    correctAnswer: 0,
+    explanation: "REPLACE() replaces all occurrences of a substring with another substring.",
+    category: "SQL"
+  },
+  {
+    id: 265,
+    question: "What is database denormalization used for?",
+    options: [
+      "Improving read performance by adding redundancy",
+      "Reducing data redundancy",
+      "Creating backups",
+      "Encrypting data"
+    ],
+    correctAnswer: 0,
+    explanation: "Denormalization adds redundancy to improve read performance at the cost of storage and update complexity.",
+    category: "Normalization"
+  },
+  {
+    id: 266,
+    question: "Which SQL keyword creates a sequence?",
+    options: ["CREATE SEQUENCE", "MAKE SEQUENCE", "NEW SEQUENCE", "ADD SEQUENCE"],
+    correctAnswer: 0,
+    explanation: "CREATE SEQUENCE creates a database object that generates unique numbers.",
+    category: "Database Fundamentals"
+  },
+  {
+    id: 267,
+    question: "What is a database dense index?",
+    options: [
+      "An index with an entry for every record",
+      "A compressed index",
+      "An index for dense data",
+      "A temporary index"
+    ],
+    correctAnswer: 0,
+    explanation: "Dense indexes have an entry for every record in the table.",
+    category: "Indexes"
+  },
+  {
+    id: 268,
+    question: "Which SQL function repeats a string multiple times?",
+    options: ["REPEAT()", "DUPLICATE()", "COPY()", "MULTIPLY()"],
+    correctAnswer: 0,
+    explanation: "REPEAT() returns a string repeated a specified number of times.",
+    category: "SQL"
+  },
+  {
+    id: 269,
+    question: "What is database third normal form (3NF)?",
+    options: [
+      "A table is in 3NF if it is in 2NF and has no transitive dependencies",
+      "A table with three columns",
+      "A table with three indexes",
+      "A table with three primary keys"
+    ],
+    correctAnswer: 0,
+    explanation: "3NF requires no transitive dependencies - non-key columns must depend only on the primary key.",
+    category: "Normalization"
+  },
+  {
+    id: 270,
+    question: "Which SQL keyword gets the next value from a sequence?",
+    options: ["NEXT VALUE", "NEXTVAL", "GET NEXT", "SEQUENCE NEXT"],
+    correctAnswer: 1,
+    explanation: "NEXTVAL retrieves the next value from a sequence.",
+    category: "Database Fundamentals"
+  },
+  {
+    id: 271,
+    question: "What is a database unique index?",
+    options: [
+      "An index that ensures all values are different",
+      "An index for unique queries",
+      "A primary key index only",
+      "A temporary index"
+    ],
+    correctAnswer: 0,
+    explanation: "Unique indexes enforce that all values in the indexed column(s) are distinct.",
+    category: "Indexes"
+  },
+  {
+    id: 272,
+    question: "Which SQL function reverses a string?",
+    options: ["REVERSE()", "FLIP()", "INVERT()", "BACK()"],
+    correctAnswer: 0,
+    explanation: "REVERSE() returns the string with characters in reverse order.",
+    category: "SQL"
+  },
+  {
+    id: 273,
+    question: "What is database second normal form (2NF)?",
+    options: [
+      "A table is in 2NF if it is in 1NF and has no partial dependencies",
+      "A table with two columns",
+      "A table with two indexes",
+      "A table with two primary keys"
+    ],
+    correctAnswer: 0,
+    explanation: "2NF requires no partial dependencies - non-key columns must depend on the entire primary key.",
+    category: "Normalization"
+  },
+  {
+    id: 274,
+    question: "Which SQL keyword creates a database link?",
+    options: ["CREATE LINK", "CREATE DATABASE LINK", "CREATE CONNECTION", "CREATE REMOTE"],
+    correctAnswer: 1,
+    explanation: "CREATE DATABASE LINK creates a connection to a remote database.",
+    category: "Database Design"
+  },
+  {
+    id: 275,
+    question: "What is a database composite index?",
+    options: [
+      "An index on multiple columns",
+      "An index made of composite materials",
+      "A compressed index",
+      "A temporary index"
+    ],
+    correctAnswer: 0,
+    explanation: "Composite indexes are created on multiple columns to optimize queries filtering on those columns.",
+    category: "Indexes"
+  },
+  {
+    id: 276,
+    question: "Which SQL function returns the leftmost characters of a string?",
+    options: ["LEFT()", "START()", "BEGIN()", "FIRST()"],
+    correctAnswer: 0,
+    explanation: "LEFT() returns the specified number of characters from the left side of a string.",
+    category: "SQL"
+  },
+  {
+    id: 277,
+    question: "What is database first normal form (1NF)?",
+    options: [
+      "A table with atomic values and no repeating groups",
+      "A table with one column",
+      "A table with one index",
+      "A table with one primary key"
+    ],
+    correctAnswer: 0,
+    explanation: "1NF requires atomic (indivisible) values and no repeating groups or arrays.",
+    category: "Normalization"
+  },
+  {
+    id: 278,
+    question: "Which SQL keyword analyzes a table for statistics?",
+    options: ["ANALYZE TABLE", "CHECK TABLE", "VERIFY TABLE", "STATISTICS TABLE"],
+    correctAnswer: 0,
+    explanation: "ANALYZE TABLE updates statistics about table contents for query optimization.",
+    category: "Maintenance"
+  },
+  {
+    id: 279,
+    question: "What is a database partial index?",
+    options: [
+      "An index with entries for a subset of rows",
+      "An incomplete index",
+      "A temporary index",
+      "A compressed index"
+    ],
+    correctAnswer: 0,
+    explanation: "Partial indexes only index rows that meet a specified condition, reducing index size.",
+    category: "Indexes"
+  },
+  {
+    id: 280,
+    question: "Which SQL function returns the rightmost characters of a string?",
+    options: ["RIGHT()", "END()", "LAST()", "FINAL()"],
+    correctAnswer: 0,
+    explanation: "RIGHT() returns the specified number of characters from the right side of a string.",
+    category: "SQL"
+  },
+  {
+    id: 281,
+    question: "What is database Boyce-Codd normal form (BCNF)?",
+    options: [
+      "A stricter version of 3NF where every determinant is a candidate key",
+      "A table with B and C columns",
+      "A backup and compression normal form",
+      "A binary coded normal form"
+    ],
+    correctAnswer: 0,
+    explanation: "BCNF is a stricter version of 3NF where every functional dependency has a candidate key as its determinant.",
+    category: "Normalization"
+  },
+  {
+    id: 282,
+    question: "Which SQL keyword repairs a corrupted table?",
+    options: ["REPAIR TABLE", "FIX TABLE", "RESTORE TABLE", "HEAL TABLE"],
+    correctAnswer: 0,
+    explanation: "REPAIR TABLE attempts to repair a corrupted table.",
+    category: "Maintenance"
+  },
+  {
+    id: 283,
+    question: "What is a database function-based index?",
+    options: [
+      "An index based on a function or expression",
+      "An index for mathematical functions",
+      "A temporary index",
+      "A compressed index"
+    ],
+    correctAnswer: 0,
+    explanation: "Function-based indexes are built on the result of a function or expression applied to column values.",
+    category: "Indexes"
+  },
+  {
+    id: 284,
+    question: "Which SQL function pads a string on the left?",
+    options: ["LPAD()", "PADLEFT()", "LEFTPAD()", "FILLLEFT()"],
+    correctAnswer: 0,
+    explanation: "LPAD() pads a string with specified characters on the left side.",
+    category: "SQL"
+  },
+  {
+    id: 285,
+    question: "What is database fourth normal form (4NF)?",
+    options: [
+      "A table in 4NF has no multi-valued dependencies",
+      "A table with four columns",
+      "A table with four indexes",
+      "A table with four primary keys"
+    ],
+    correctAnswer: 0,
+    explanation: "4NF eliminates multi-valued dependencies - a table should not have independent multi-valued facts about a key.",
+    category: "Normalization"
+  },
+  {
+    id: 286,
+    question: "Which SQL keyword optimizes a table?",
+    options: ["OPTIMIZE TABLE", "IMPROVE TABLE", "ENHANCE TABLE", "TUNE TABLE"],
+    correctAnswer: 0,
+    explanation: "OPTIMIZE TABLE reorganizes table data and indexes to improve performance.",
+    category: "Maintenance"
+  },
+  {
+    id: 287,
+    question: "What is a database reverse index?",
+    options: [
+      "An index with key values stored in reverse order",
+      "An index used for reverse lookups",
+      "A backup index",
+      "A temporary index"
+    ],
+    correctAnswer: 0,
+    explanation: "Reverse indexes store key values in reverse order to distribute index entries more evenly.",
+    category: "Indexes"
+  },
+  {
+    id: 288,
+    question: "Which SQL function pads a string on the right?",
+    options: ["RPAD()", "PADRIGHT()", "RIGHTPAD()", "FILLRIGHT()"],
+    correctAnswer: 0,
+    explanation: "RPAD() pads a string with specified characters on the right side.",
+    category: "SQL"
+  },
+  {
+    id: 289,
+    question: "What is database fifth normal form (5NF)?",
+    options: [
+      "A table in 5NF has no join dependencies",
+      "A table with five columns",
+      "A table with five indexes",
+      "A table with five primary keys"
+    ],
+    correctAnswer: 0,
+    explanation: "5NF (Projected-Join Normal Form) eliminates join dependencies that are not implied by candidate keys.",
+    category: "Normalization"
+  },
+  {
+    id: 290,
+    question: "Which SQL keyword locks a table?",
+    options: ["LOCK TABLE", "BLOCK TABLE", "SECURE TABLE", "FREEZE TABLE"],
+    correctAnswer: 0,
+    explanation: "LOCK TABLE explicitly locks a table for the current session.",
+    category: "Concurrency"
+  },
+  {
+    id: 291,
+    question: "What is a database domain integrity constraint?",
+    options: [
+      "A constraint that ensures valid entries for a column",
+      "A constraint on database domains",
+      "A network security constraint",
+      "A user access constraint"
+    ],
+    correctAnswer: 0,
+    explanation: "Domain integrity ensures that all entries in a column are valid according to defined rules.",
+    category: "Constraints"
+  },
+  {
+    id: 292,
+    question: "Which SQL function converts a number to a string?",
+    options: ["STR()", "TOSTRING()", "STRING()", "TEXT()"],
+    correctAnswer: 0,
+    explanation: "STR() converts numeric data to character data.",
+    category: "SQL"
+  },
+  {
+    id: 293,
+    question: "What is database entity integrity?",
+    options: [
+      "Ensuring primary keys are unique and not null",
+      "Ensuring all entities exist",
+      "Ensuring data encryption",
+      "Ensuring user authentication"
+    ],
+    correctAnswer: 0,
+    explanation: "Entity integrity ensures every table has a primary key and that key is unique and not null.",
+    category: "Constraints"
+  },
+  {
+    id: 294,
+    question: "Which SQL keyword unlocks a table?",
+    options: ["UNLOCK TABLE", "RELEASE TABLE", "FREE TABLE", "OPEN TABLE"],
+    correctAnswer: 0,
+    explanation: "UNLOCK TABLE releases locks held on a table.",
+    category: "Concurrency"
+  },
+  {
+    id: 295,
+    question: "What is a database check constraint?",
+    options: [
+      "A constraint that validates data against a condition",
+      "A constraint that checks for duplicates",
+      "A security check",
+      "A backup check"
+    ],
+    correctAnswer: 0,
+    explanation: "CHECK constraints ensure all values in a column satisfy a specific condition.",
+    category: "Constraints"
+  },
+  {
+    id: 296,
+    question: "Which SQL function returns the current time?",
+    options: ["NOW()", "CURRENT_TIME()", "TIME()", "GETTIME()"],
+    correctAnswer: 1,
+    explanation: "CURRENT_TIME() returns the current time.",
+    category: "SQL"
+  },
+  {
+    id: 297,
+    question: "What is database referential integrity?",
+    options: [
+      "Ensuring relationships between tables remain valid",
+      "Ensuring data is encrypted",
+      "Ensuring users are authenticated",
+      "Ensuring backups exist"
+    ],
+    correctAnswer: 0,
+    explanation: "Referential integrity ensures foreign key values match primary key values in related tables.",
+    category: "Referential Integrity"
+  },
+  {
+    id: 298,
+    question: "Which SQL keyword sets a savepoint in a transaction?",
+    options: ["SAVEPOINT", "CHECKPOINT", "MARKPOINT", "TRANSACTION POINT"],
+    correctAnswer: 0,
+    explanation: "SAVEPOINT sets a point within a transaction to which you can later roll back.",
+    category: "Transactions"
+  },
+  {
+    id: 299,
+    question: "What is a database unique constraint?",
+    options: [
+      "Ensures all values in a column are different",
+      "Ensures data is unique across all tables",
+      "Ensures users are unique",
+      "Ensures indexes are unique"
+    ],
+    correctAnswer: 0,
+    explanation: "UNIQUE constraint ensures all values in a column or group of columns are distinct.",
+    category: "Constraints"
+  },
+  {
+    id: 300,
+    question: "Which SQL function returns the current timestamp?",
+    options: ["NOW()", "CURRENT_TIMESTAMP()", "TIMESTAMP()", "GETDATE()"],
+    correctAnswer: 1,
+    explanation: "CURRENT_TIMESTAMP() returns the current date and time.",
+    category: "SQL"
+  }
+];
+
+export const getQuestionsByCategory = () => {
+  const categories: Record<string, Question[]> = {};
+  questions.forEach(q => {
+    if (!categories[q.category]) {
+      categories[q.category] = [];
+    }
+    categories[q.category].push(q);
+  });
+  return categories;
+};
+
+export const getQuestionById = (id: number): Question | undefined => {
+  return questions.find(q => q.id === id);
+};
