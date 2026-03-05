@@ -1,6 +1,23 @@
-# React + TypeScript + Vite
+# ITS Microsoft Database Exam Certification Practice 
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This project is a simulation and study tool designed for students preparing for the **Information Technology Specialist (ITS): Databases** certification (formerly part of the Microsoft Technology Associate framework).
+
+##  Goal
+The objective of this repository is to help students:
+* **Master Normalization:** Practice identifying and correcting data up to Third Normal Form (3NF).
+* **Visual Learning:** Transition from flat, messy data to structured relational schemas.
+* **Exam Readiness:** Familiarize yourself with the logic and question styles found in official Microsoft exams.
+
+##  How to Use This for Practice
+1. **Analyze the Components:** Look through the sample data provided in the simulation.
+2. **Apply Normalization Rules:** * **1NF:** Ensure all attributes are atomic (no lists in cells).
+    * **2NF:** Remove partial functional dependencies.
+    * **3NF:** Remove transitive dependencies (e.g., when a non-key column depends on another non-key column).
+3. **Verify:** Compare your logic against the provided solutions to ensure you're thinking like a Database Administrator (DBA).
+
+---
+
+# React + TypeScript + Vite
 
 Currently, two official plugins are available:
 
